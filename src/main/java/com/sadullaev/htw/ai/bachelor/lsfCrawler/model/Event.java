@@ -84,6 +84,12 @@ public class Event {
 	public int getLsfNr() {
 		return lsfNr;
 	}
+	
+	public void setLsfNr(String lsfNr) {
+		if(!lsfNr.equals("")){
+			this.lsfNr = Integer.parseInt(lsfNr);
+		}
+	}
 
 	public void setLsfNr(int lsfNr) {
 		this.lsfNr = lsfNr;
@@ -127,6 +133,12 @@ public class Event {
 
 	public void setLecturer(String lecturer) {
 		this.lecturer = lecturer;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [date=" + date + ", begin=" + begin + ", end=" + end + ", lsfNr=" + lsfNr + ", name=" + name
+				+ ", lsfId=" + lsfId + ", building=" + building + ", room=" + room + ", lecturer=" + lecturer + "]";
 	}
 	
 	
