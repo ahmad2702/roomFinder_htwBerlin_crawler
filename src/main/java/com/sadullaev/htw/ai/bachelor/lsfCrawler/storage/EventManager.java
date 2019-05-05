@@ -52,6 +52,18 @@ public class EventManager {
 
         session.close();
     }
+	
+	public void addFull() {
+		
+		String url = "https://lsf.htw-berlin.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&&HISCalendar_Date=28.04.2019&asi=";
+        
+        EventParser eventParser = new EventParser(url);
+        eventParser.load();
+		
+        List<Event> myArrayList = eventParser.getEvents();
+		System.out.println(myArrayList.size());
+		
+	}
  
 	public void read() {
         // code to get a book

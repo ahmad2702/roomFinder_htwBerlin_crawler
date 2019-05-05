@@ -1,13 +1,5 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 
-import java.io.IOException;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 
 /**
@@ -23,41 +15,17 @@ public class App
         
         System.out.println( "--------------------" );
         
-        /*
-        EventManager eventManager = new EventManager();
-        eventManager.setup();
-        
-        eventManager.create();
-        
-        eventManager.exit();
-        */
-        
-        //String url = "https://lsf.htw-berlin.de/qisserver/rds?state=currentLectures&type=0&next=CurrentLectures.vm&nextdir=ressourcenManager&&HISCalendar_Date=06.05.2019&asi=";
-        
-        //EventParser eventParser = new EventParser(url);
-        //eventParser.load();
-        
-        
-        //System.out.println(eventParser.getSize());
+
         
         EventManager eventManager = new EventManager();
-        eventManager.setup();
-        eventManager.create();
-        eventManager.exit();
-        
-        System.out.println( "--------------------" );
-        //eventParser.getEvents();
+        //eventManager.setup();
+        //eventManager.create();
         
         
+        eventManager.addFull();
         
-        /**
-        for (Element element : listNews.select("tr")) {
-        	System.out.println(element.text());
-        }
-        */
-        
-        
-        
+        //eventManager.exit();
+
         
         
         
