@@ -1,18 +1,19 @@
 # htwLsf_room_crawler
 
 events Table
-CREATE TABLE `lsf_1`.`events` (
+CREATE TABLE `lsf_4`.`events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
   `begin` DOUBLE NOT NULL,
   `end` DOUBLE NOT NULL,
-  `lsf_nr` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `lsf_id` INT NOT NULL,
-  `building` VARCHAR(45) NOT NULL,
-  `room` VARCHAR(45) NOT NULL,
-  `lecturer` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
+  `lsf_nr` DOUBLE NOT NULL,
+  `name` VARCHAR(300) NOT NULL,
+  `lsf_id` DOUBLE NOT NULL,
+  `building` VARCHAR(300) NOT NULL,
+  `room` VARCHAR(300) NOT NULL,
+  `lecturer` VARCHAR(300) NOT NULL,
+  PRIMARY KEY (`id`)
+  );
   
   
   

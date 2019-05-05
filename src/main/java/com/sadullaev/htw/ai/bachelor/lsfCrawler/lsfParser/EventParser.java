@@ -47,7 +47,7 @@ public class EventParser {
         }
 	}
 	
-	public void getEvents() {
+	public List<Event> getEvents() {
 		List<Event> myArrayList = new ArrayList<Event>();
 		for(int i = 0; i < size; i++) {
 			Elements events = table.get(i).select("td");
@@ -55,16 +55,15 @@ public class EventParser {
         	currentEvent.setDate(new Date(0));
         	currentEvent.setBegin(1);
         	currentEvent.setEnd(9);
-        	currentEvent.setLsfNr(666);
+        	currentEvent.setLsfNr(events.get(2).text());
         	currentEvent.setName(events.get(3).text());
 	        currentEvent.setLsfId(666);
 	        currentEvent.setBuilding(events.get(4).text());
 	        currentEvent.setRoom(events.get(5).text());
-	        currentEvent.setLecturer(events.get(6).text());
+	        currentEvent.setLecturer(events.get(7).text());
 	        myArrayList.add(currentEvent);
-	        System.out.println(currentEvent.toString());
         }
-		System.out.println(myArrayList.size());
+		return myArrayList;
 	}
 
 	public Elements getDoc() {

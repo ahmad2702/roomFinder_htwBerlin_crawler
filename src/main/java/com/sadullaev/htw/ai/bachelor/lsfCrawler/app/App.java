@@ -32,17 +32,21 @@ public class App
         eventManager.exit();
         */
         
-        String url = "https://lsf.htw-berlin.de/qisserver/rds?state=currentLectures&type=0&next=CurrentLectures.vm&nextdir=ressourcenManager&&HISCalendar_Date=06.05.2019&asi=";
+        //String url = "https://lsf.htw-berlin.de/qisserver/rds?state=currentLectures&type=0&next=CurrentLectures.vm&nextdir=ressourcenManager&&HISCalendar_Date=06.05.2019&asi=";
         
-        EventParser eventParser = new EventParser(url);
-        eventParser.load();
+        //EventParser eventParser = new EventParser(url);
+        //eventParser.load();
         
         
-        System.out.println(eventParser.getSize());
+        //System.out.println(eventParser.getSize());
         
+        EventManager eventManager = new EventManager();
+        eventManager.setup();
+        eventManager.create();
+        eventManager.exit();
         
         System.out.println( "--------------------" );
-        eventParser.getEvents();
+        //eventParser.getEvents();
         
         
         

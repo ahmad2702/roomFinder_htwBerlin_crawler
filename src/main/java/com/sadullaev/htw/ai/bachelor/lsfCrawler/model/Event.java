@@ -28,13 +28,13 @@ public class Event {
     private double end;
 	
 	@Column(name = "lsf_nr")
-    private int lsfNr;
+    private double lsfNr;
 	
 	@Column(name = "name")
     private String name;
 	
 	@Column(name = "lsf_id")
-    private int lsfId;
+    private double lsfId;
 	
 	@Column(name = "building")
     private String building;
@@ -81,13 +81,13 @@ public class Event {
 		this.end = end;
 	}
 
-	public int getLsfNr() {
+	public double getLsfNr() {
 		return lsfNr;
 	}
 	
 	public void setLsfNr(String lsfNr) {
 		if(!lsfNr.equals("")){
-			this.lsfNr = Integer.parseInt(lsfNr);
+			this.lsfNr = Double.parseDouble(lsfNr);
 		}
 	}
 
@@ -103,7 +103,7 @@ public class Event {
 		this.name = name;
 	}
 
-	public int getLsfId() {
+	public double getLsfId() {
 		return lsfId;
 	}
 

@@ -1,6 +1,8 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.storage;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +10,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 
 public class EventManager {
@@ -31,23 +34,22 @@ public class EventManager {
  
 	public void create() {
         
-    	Event event = new Event();
-        event.setDate(new Date(0));
-        event.setBegin(1);
-        event.setEnd(9);
-        event.setLsfNr(123123123);
-        event.setName("Test_Name_1");
-        event.setLsfId(666);
-        event.setBuilding("Aris");
-        event.setRoom("zimmer");
-        event.setLecturer("Zigi");
+		String url = "https://lsf.htw-berlin.de/qisserver/rds?state=currentLectures&type=0&next=CurrentLectures.vm&nextdir=ressourcenManager&&HISCalendar_Date=06.05.2019&asi=";
+        
+        EventParser eventParser = new EventParser(url);
+        eventParser.load();
     	
+        List<Event> myArrayList = eventParser.getEvents();
+        
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
-     
-        session.save(event);
-     
-        session.getTransaction().commit();
+        //session.beginTransaction();
+        
+        for(Event event : myArrayList) {
+        	session.beginTransaction();
+        	session.save(event);
+        	session.getTransaction().commit();
+        }
+
         session.close();
     }
  
