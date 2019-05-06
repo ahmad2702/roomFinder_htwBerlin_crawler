@@ -1,6 +1,7 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.storage;
 
 import java.sql.Date;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
 
 public class EventManager {
 	
@@ -55,13 +57,32 @@ public class EventManager {
 	
 	public void addFull() {
 		
-		String url = "https://lsf.htw-berlin.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&&HISCalendar_Date=28.04.2019&asi=";
-        
-        EventParser eventParser = new EventParser(url);
-        eventParser.load();
+		List<String> dateList = DateUtils.getListWithDay(Month.APRIL, 2019, 1);
 		
-        List<Event> myArrayList = eventParser.getEvents();
-		System.out.println(myArrayList.size());
+		for(int i = 0; i < dateList.size(); i++) {
+			String url = "https://lsf.htw-berlin.de/qisserver/rds?"
+					+ "state=currentLectures&type=0&next=CurrentLectures.vm&"
+					+ "nextdir=ressourcenManager&&HISCalendar_Date="+dateList.get(i)+"&asi=";
+			
+			
+			EventParser eventParser = new EventParser(url);
+			eventParser.load();
+			
+			List<Event> myArrayList = eventParser.getEvents();
+			if(myArrayList.size() != 0) {
+				
+				Session session = sessionFactory.openSession();
+		        
+		        for(Event event : myArrayList) {
+		        	session.beginTransaction();
+		        	session.save(event);
+		        	session.getTransaction().commit();
+		        }
+
+		        session.close();
+			}
+			
+		}
 		
 	}
  

@@ -5,22 +5,19 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DateUtils {
 	
-	public static void getListWithDay(int startYear, int month) {
+	public static List<String> getListWithDay(Month month, int startYear, int monthNumber) {
 		
-		YearMonth start = YearMonth.of( startYear , Month.APRIL );
-		System.out.println("Start: " + start.getMonth() + "/" + start.getYear());
+		List<String> dateList = new ArrayList<String>();
+		
+		YearMonth start = YearMonth.of(startYear , month);
 
-		YearMonth stop = start.plusMonths(month);
-		System.out.println("End: " + stop.getMonth() + "/" + stop.getYear());
-		
-		//int tage = start.lengthOfMonth();
-		//System.out.println("In diesem Monat: " + tage + " Tage.");
-		
-		for(int i = 1; i <= month; i++) {
+		for(int i = 1; i <= monthNumber; i++) {
 			int tage = start.lengthOfMonth();
 			
 			for (int j = 1; j <= tage; j++) {
@@ -29,13 +26,13 @@ public class DateUtils {
 				
 				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 				String date = DATE_FORMAT.format(currentDate);
-				System.out.println(date);
+				dateList.add(date);
 			}
 			start = start.plusMonths(1);
 		}
 		
 		
-		
+		return dateList;
 		
 	}
 	
