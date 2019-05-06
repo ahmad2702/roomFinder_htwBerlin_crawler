@@ -25,6 +25,7 @@ public class EventManager {
 		    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception ex) {
 		    StandardServiceRegistryBuilder.destroy(registry);
+		    System.out.println("Datenbank wurde nicht gefunden.");
 		}
     }
 	
@@ -42,7 +43,6 @@ public class EventManager {
         List<Event> myArrayList = eventParser.getEvents();
         
         Session session = sessionFactory.openSession();
-        //session.beginTransaction();
         
         for(Event event : myArrayList) {
         	session.beginTransaction();

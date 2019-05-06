@@ -1,6 +1,7 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
 
 /**
  * Hello world!
@@ -16,16 +17,16 @@ public class App
         System.out.println( "--------------------" );
         
 
-        
+        /** Okay
         EventManager eventManager = new EventManager();
-        //eventManager.setup();
+        eventManager.setup();
         //eventManager.create();
+        //eventManager.addFull();
+        eventManager.exit();
+		*/
         
         
-        eventManager.addFull();
-        
-        //eventManager.exit();
-
+        DateUtils.getListWithDay(2018, 1);
         
         
         
