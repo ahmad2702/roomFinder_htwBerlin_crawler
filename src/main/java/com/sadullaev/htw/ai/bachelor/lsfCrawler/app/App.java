@@ -1,11 +1,13 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 
+import java.text.ParseException;
+
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 
 public class App 
 {
 	
-    public static void main( String[] args ){
+    public static void main( String[] args ) throws ParseException{
     	
         System.out.println( "Program is started." );
         
@@ -23,7 +25,7 @@ public class App
         
         EventManager eventManager = new EventManager();
         eventManager.setup();
-        eventManager.addFull();
+        eventManager.create();
         eventManager.exit();
         
         

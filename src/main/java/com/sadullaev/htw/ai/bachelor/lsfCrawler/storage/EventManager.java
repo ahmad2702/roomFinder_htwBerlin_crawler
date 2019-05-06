@@ -1,6 +1,7 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.storage;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +36,9 @@ public class EventManager {
 		sessionFactory.close();
     }
  
-	public void create() {
-        
-		String url = "https://lsf.htw-berlin.de/qisserver/rds?state=currentLectures&type=0&next=CurrentLectures.vm&nextdir=ressourcenManager&&HISCalendar_Date=06.05.2019&asi=";
-        
-        EventParser eventParser = new EventParser(url);
+	public void create() throws ParseException {
+
+        EventParser eventParser = new EventParser("06.05.2019");
         eventParser.load();
     	
         List<Event> myArrayList = eventParser.getEvents();
@@ -55,17 +54,13 @@ public class EventManager {
         session.close();
     }
 	
-	public void addFull() {
+	public void addFull() throws ParseException {
 		
 		List<String> dateList = DateUtils.getListWithDay(Month.APRIL, 2019, 1);
 		
 		for(int i = 0; i < dateList.size(); i++) {
-			String url = "https://lsf.htw-berlin.de/qisserver/rds?"
-					+ "state=currentLectures&type=0&next=CurrentLectures.vm&"
-					+ "nextdir=ressourcenManager&&HISCalendar_Date="+dateList.get(i)+"&asi=";
-			
-			
-			EventParser eventParser = new EventParser(url);
+
+			EventParser eventParser = new EventParser(dateList.get(i));
 			eventParser.load();
 			
 			List<Event> myArrayList = eventParser.getEvents();

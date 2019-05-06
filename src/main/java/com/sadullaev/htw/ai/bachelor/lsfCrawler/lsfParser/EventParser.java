@@ -2,8 +2,12 @@ package com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,15 +19,20 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 public class EventParser {
 	
 	private String url;
-	private final static String userAgent = "Chrome/4.0.249.0 Safari/532.5";
+	private String date;
 	
+	private final static String userAgent = "Chrome/4.0.249.0 Safari/532.5";
 	private final static String tableSelector = "body > table:nth-child(3) > tbody > tr:nth-child(1) > td:nth-child(2) > table > tbody > tr:nth-child(2) > td > table:nth-child(5)";
 	
 	private Elements table = null;
 	private int size = 0;
 	
-	public EventParser(String url) {
-		this.setUrl(url);
+	public EventParser(String date) {
+		this.url = "https://lsf.htw-berlin.de/qisserver/rds?"
+				+ "state=currentLectures&type=0&next=CurrentLectures.vm&"
+				+ "nextdir=ressourcenManager&&HISCalendar_Date="+date+"&asi=";
+		
+		this.date = date;
 	}
 
 	public String getUrl() {
@@ -47,12 +56,19 @@ public class EventParser {
         }
 	}
 	
-	public List<Event> getEvents() {
+	public List<Event> getEvents() throws ParseException {
 		List<Event> myArrayList = new ArrayList<Event>();
 		for(int i = 0; i < size; i++) {
 			Elements events = table.get(i).select("td");
         	Event currentEvent = new Event(); 
-        	currentEvent.setDate(new Date(0));
+        	
+        	String currentDate = "2019-04-06" + " " + events.get(1).text();
+        	
+        	DateFormat format_1 = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        	java.util.Date dateDate = format_1.parse(currentDate);
+        	System.out.println(currentDate + " : " + dateDate.getTime() + " -> " + new Date(dateDate.getTime()).getTime());
+        	
+        	currentEvent.setDate(new Date(dateDate.getTime()));
         	currentEvent.setBegin(1);
         	currentEvent.setEnd(9);
         	currentEvent.setLsfNr(events.get(2).text());
