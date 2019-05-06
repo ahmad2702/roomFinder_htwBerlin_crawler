@@ -70,16 +70,19 @@ public class EventManager {
 			
 			List<Event> myArrayList = eventParser.getEvents();
 			if(myArrayList.size() != 0) {
-				
+				System.out.println("---");
 				Session session = sessionFactory.openSession();
 		        
+				System.out.println(dateList.get(i) + " is starting...");
 		        for(Event event : myArrayList) {
 		        	session.beginTransaction();
 		        	session.save(event);
 		        	session.getTransaction().commit();
 		        }
+		        System.out.println(dateList.get(i) + " is stopping...");
 
 		        session.close();
+		        System.out.println("---");
 			}
 			
 		}
