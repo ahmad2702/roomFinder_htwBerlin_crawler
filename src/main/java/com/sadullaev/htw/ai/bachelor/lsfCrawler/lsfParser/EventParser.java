@@ -47,7 +47,7 @@ public class EventParser {
 	
 	public void load() {
 		try {
-			Document pageElements = Jsoup.connect(url).userAgent(userAgent).get();
+			Document pageElements = Jsoup.connect(url).userAgent(userAgent).timeout(10 * 1000).get();
         	Elements tableWithData = pageElements.select(tableSelector);
         	this.table = tableWithData.select("tr");
         	

@@ -42,18 +42,26 @@ public class EventManager {
         eventParser.load();
     	
         List<Event> myArrayList = eventParser.getEvents();
+        System.out.println("----------------");
         
-        Session session = sessionFactory.openSession();
-        
-        System.out.println(day + " is starting...");
-        for(Event event : myArrayList) {
-        	session.beginTransaction();
-        	session.save(event);
-        	session.getTransaction().commit();
-        }
-        System.out.println(day + " is stopping...");
+        System.out.println("Anzahl (" + day + "): " + myArrayList.size());
+        if(myArrayList.size() != 0) {
+        	
+        	Session session = sessionFactory.openSession();
+	        System.out.println(day + " save to database...");
+	        
+	        for(Event event : myArrayList) {
+	        	session.beginTransaction();
+	        	session.save(event);
+	        	session.getTransaction().commit();
+	        }
+	        System.out.println(day + " is done.");
+	
+	        session.close();
 
-        session.close();
+        }
+        
+        System.out.println("----------------");
     }
 	
 	public void addFull() throws ParseException {
@@ -92,26 +100,8 @@ public class EventManager {
 		
 		for(int i = 0; i < dateList.size(); i++) {
 
-			EventParser eventParser = new EventParser(dateList.get(i));
-			eventParser.load();
-			
-			List<Event> myArrayList = eventParser.getEvents();
-			if(myArrayList.size() != 0) {
-				System.out.println("---");
-				Session session = sessionFactory.openSession();
-		        
-				System.out.println(dateList.get(i) + " is starting...");
-		        for(Event event : myArrayList) {
-		        	session.beginTransaction();
-		        	session.save(event);
-		        	session.getTransaction().commit();
-		        }
-		        System.out.println(dateList.get(i) + " is stopping...");
+			parseForDay(dateList.get(i));
 
-		        session.close();
-		        System.out.println("---");
-			}
-			
 		}
 		
 	}

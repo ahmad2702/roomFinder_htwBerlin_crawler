@@ -1,6 +1,7 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 
 import java.text.ParseException;
+import java.time.Month;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
@@ -26,7 +27,7 @@ public class App
         
         EventManager eventManager = new EventManager();
         eventManager.setup();
-        eventManager.parseForDay("06.05.2019");
+        eventManager.addFullNew(Month.APRIL, 2018, 1);
         eventManager.exit();
 
         
