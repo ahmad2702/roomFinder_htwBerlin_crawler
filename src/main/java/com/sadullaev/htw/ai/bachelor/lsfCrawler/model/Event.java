@@ -23,10 +23,10 @@ public class Event {
     private Timestamp date;
 	
 	@Column(name = "begin")
-    private double begin;
+    private Timestamp begin;
 	
 	@Column(name = "end")
-    private double end;
+    private Timestamp end;
 	
 	@Column(name = "lsf_nr")
     private double lsfNr;
@@ -66,19 +66,19 @@ public class Event {
 		this.date = date;
 	}
 
-	public double getBegin() {
+	public Timestamp getBegin() {
 		return begin;
 	}
 
-	public void setBegin(double begin) {
+	public void setBegin(Timestamp begin) {
 		this.begin = begin;
 	}
 
-	public double getEnd() {
+	public Timestamp getEnd() {
 		return end;
 	}
 
-	public void setEnd(double end) {
+	public void setEnd(Timestamp end) {
 		this.end = end;
 	}
 

@@ -63,14 +63,16 @@ public class EventParser {
 			Elements events = table.get(i).select("td");
         	Event currentEvent = new Event(); 
         	
-        	String currentDate = this.date + " " + events.get(1).text();
+        	String start = this.date + " " + events.get(0).text();
+        	String end = this.date + " " + events.get(1).text();
         	
         	DateFormat format_1 = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-        	java.util.Date dateDate = format_1.parse(currentDate);
+        	Timestamp startDate = new Timestamp(format_1.parse(start).getTime());
+        	Timestamp endDate = new Timestamp(format_1.parse(end).getTime());
         	
-        	currentEvent.setDate(new Timestamp(dateDate.getTime()));
-        	currentEvent.setBegin(1);
-        	currentEvent.setEnd(9);
+        	currentEvent.setDate(startDate);
+        	currentEvent.setBegin(startDate);
+        	currentEvent.setEnd(endDate);
         	currentEvent.setLsfNr(events.get(2).text());
         	currentEvent.setName(events.get(3).text());
 	        currentEvent.setLsfId(666);
