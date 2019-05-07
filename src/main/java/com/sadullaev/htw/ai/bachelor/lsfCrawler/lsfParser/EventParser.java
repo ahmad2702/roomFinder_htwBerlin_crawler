@@ -16,6 +16,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
 public class EventParser {
 	
@@ -76,9 +77,10 @@ public class EventParser {
         	currentEvent.setLsfNr(events.get(2).text());
         	currentEvent.setName(events.get(3).text());
         	
+        	String eventLink = events.get(3).select("a").first().attr("abs:href");
+        	int eventId = UrlUtils.getEventIdFromLink(eventLink);
         	
-        	
-	        currentEvent.setLsfId(666);
+	        currentEvent.setLsfId(eventId);
 	        currentEvent.setBuilding(events.get(4).text());
 	        currentEvent.setRoom(events.get(5).text());
 	        currentEvent.setLecturer(events.get(7).text());

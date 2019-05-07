@@ -24,12 +24,11 @@ public class App
 		*/
         
         
-        //EventManager eventManager = new EventManager();
-        //eventManager.setup();
-        //eventManager.create();
-        //eventManager.exit();
-        
-        UrlUtils.getEventIdFromLink("");
+        EventManager eventManager = new EventManager();
+        eventManager.setup();
+        eventManager.parseForDay("06.05.2019");
+        eventManager.exit();
+
         
         
         

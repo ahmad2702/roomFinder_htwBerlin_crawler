@@ -36,20 +36,22 @@ public class EventManager {
 		sessionFactory.close();
     }
  
-	public void create() throws ParseException {
+	public void parseForDay(String day) throws ParseException {
 
-        EventParser eventParser = new EventParser("06.05.2019");
+        EventParser eventParser = new EventParser(day);
         eventParser.load();
     	
         List<Event> myArrayList = eventParser.getEvents();
         
         Session session = sessionFactory.openSession();
         
+        System.out.println(day + " is starting...");
         for(Event event : myArrayList) {
         	session.beginTransaction();
         	session.save(event);
         	session.getTransaction().commit();
         }
+        System.out.println(day + " is stopping...");
 
         session.close();
     }
@@ -57,6 +59,36 @@ public class EventManager {
 	public void addFull() throws ParseException {
 		
 		List<String> dateList = DateUtils.getListWithDay(Month.APRIL, 2019, 1);
+		
+		for(int i = 0; i < dateList.size(); i++) {
+
+			EventParser eventParser = new EventParser(dateList.get(i));
+			eventParser.load();
+			
+			List<Event> myArrayList = eventParser.getEvents();
+			if(myArrayList.size() != 0) {
+				System.out.println("---");
+				Session session = sessionFactory.openSession();
+		        
+				System.out.println(dateList.get(i) + " is starting...");
+		        for(Event event : myArrayList) {
+		        	session.beginTransaction();
+		        	session.save(event);
+		        	session.getTransaction().commit();
+		        }
+		        System.out.println(dateList.get(i) + " is stopping...");
+
+		        session.close();
+		        System.out.println("---");
+			}
+			
+		}
+		
+	}
+	
+	public void addFullNew(Month startMonth, int startYear, int monthNumber) throws ParseException {
+		
+		List<String> dateList = DateUtils.getListWithDay(startMonth, startYear, monthNumber);
 		
 		for(int i = 0; i < dateList.size(); i++) {
 
