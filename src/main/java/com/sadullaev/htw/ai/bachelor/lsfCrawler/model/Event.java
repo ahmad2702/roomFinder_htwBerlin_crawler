@@ -1,6 +1,7 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ public class Event {
     private int id;
 	
 	@Column(name = "date")
-    private Date date;
+    private Timestamp date;
 	
 	@Column(name = "begin")
     private double begin;
@@ -57,11 +58,11 @@ public class Event {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 

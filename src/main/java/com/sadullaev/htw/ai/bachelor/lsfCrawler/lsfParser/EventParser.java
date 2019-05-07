@@ -2,6 +2,7 @@ package com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,13 +63,12 @@ public class EventParser {
 			Elements events = table.get(i).select("td");
         	Event currentEvent = new Event(); 
         	
-        	String currentDate = "2019-04-06" + " " + events.get(1).text();
+        	String currentDate = this.date + " " + events.get(1).text();
         	
-        	DateFormat format_1 = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        	DateFormat format_1 = new SimpleDateFormat("dd.MM.yyyy hh:mm");
         	java.util.Date dateDate = format_1.parse(currentDate);
-        	System.out.println(currentDate + " : " + dateDate.getTime() + " -> " + new Date(dateDate.getTime()).getTime());
         	
-        	currentEvent.setDate(new Date(dateDate.getTime()));
+        	currentEvent.setDate(new Timestamp(dateDate.getTime()));
         	currentEvent.setBegin(1);
         	currentEvent.setEnd(9);
         	currentEvent.setLsfNr(events.get(2).text());
