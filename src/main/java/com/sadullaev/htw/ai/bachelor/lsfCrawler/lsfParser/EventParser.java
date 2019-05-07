@@ -70,11 +70,14 @@ public class EventParser {
         	Timestamp startDate = new Timestamp(format_1.parse(start).getTime());
         	Timestamp endDate = new Timestamp(format_1.parse(end).getTime());
         	
-        	currentEvent.setDate(startDate);
+        	currentEvent.setDate(new Date(startDate.getTime()));
         	currentEvent.setBegin(startDate);
         	currentEvent.setEnd(endDate);
         	currentEvent.setLsfNr(events.get(2).text());
         	currentEvent.setName(events.get(3).text());
+        	
+        	
+        	
 	        currentEvent.setLsfId(666);
 	        currentEvent.setBuilding(events.get(4).text());
 	        currentEvent.setRoom(events.get(5).text());

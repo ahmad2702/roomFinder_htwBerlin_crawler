@@ -3,6 +3,7 @@ package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 import java.text.ParseException;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
 public class App 
 {
@@ -23,10 +24,12 @@ public class App
 		*/
         
         
-        EventManager eventManager = new EventManager();
-        eventManager.setup();
-        eventManager.create();
-        eventManager.exit();
+        //EventManager eventManager = new EventManager();
+        //eventManager.setup();
+        //eventManager.create();
+        //eventManager.exit();
+        
+        UrlUtils.getEventIdFromLink("");
         
         
         

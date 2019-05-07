@@ -20,7 +20,7 @@ public class Event {
     private int id;
 	
 	@Column(name = "date")
-    private Timestamp date;
+    private Date date;
 	
 	@Column(name = "begin")
     private Timestamp begin;
@@ -29,7 +29,7 @@ public class Event {
     private Timestamp end;
 	
 	@Column(name = "lsf_nr")
-    private double lsfNr;
+    private String lsfNr;
 	
 	@Column(name = "name")
     private String name;
@@ -58,11 +58,11 @@ public class Event {
 		this.id = id;
 	}
 
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -82,17 +82,11 @@ public class Event {
 		this.end = end;
 	}
 
-	public double getLsfNr() {
+	public String getLsfNr() {
 		return lsfNr;
 	}
 	
 	public void setLsfNr(String lsfNr) {
-		if(!lsfNr.equals("")){
-			this.lsfNr = Double.parseDouble(lsfNr);
-		}
-	}
-
-	public void setLsfNr(int lsfNr) {
 		this.lsfNr = lsfNr;
 	}
 
