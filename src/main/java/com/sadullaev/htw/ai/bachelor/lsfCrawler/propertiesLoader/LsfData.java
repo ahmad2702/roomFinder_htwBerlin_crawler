@@ -1,12 +1,11 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class LsfData {
 	
-	static FileInputStream fis;
 	static Properties property = new Properties();
 	private static String url;
 	private static String otherParam;
@@ -20,8 +19,8 @@ public class LsfData {
 	public static void load() {
 		
 		try {
-            fis = new FileInputStream("src/main/resources/lsf.properties");
-            property.load(fis);
+            InputStream input = LsfData.class.getClassLoader().getResourceAsStream("lsf.properties");
+            property.load(input);
 
             url = property.getProperty("url");
             otherParam = property.getProperty("other_param");

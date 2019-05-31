@@ -2,6 +2,7 @@
 ##############################
 
 #Table: events
+CREATE SCHEMA `bachelor` ;
 
 CREATE TABLE `bachelor`.`events` (
   `id` INT NOT NULL AUTO_INCREMENT,
