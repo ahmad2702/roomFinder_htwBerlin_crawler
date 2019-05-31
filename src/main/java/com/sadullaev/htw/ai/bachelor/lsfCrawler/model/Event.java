@@ -46,6 +46,9 @@ public class Event {
 	@Column(name = "lecturer")
     private String lecturer;
 	
+	@Column(name = "is_actual")
+    private int isActual;
+	
 	public Event() {
 		
 	}
@@ -128,6 +131,14 @@ public class Event {
 
 	public void setLecturer(String lecturer) {
 		this.lecturer = lecturer;
+	}
+
+	public int getIsActual() {
+		return isActual;
+	}
+
+	public void setIsActual(int isActual) {
+		this.isActual = isActual;
 	}
 
 	@Override

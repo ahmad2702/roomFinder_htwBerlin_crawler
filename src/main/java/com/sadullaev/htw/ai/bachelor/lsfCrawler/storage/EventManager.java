@@ -36,15 +36,20 @@ public class EventManager {
 		sessionFactory.close();
     }
  
-	public void parseForDay(String day) throws ParseException {
+	private void parseForDay(String day, boolean isActual) throws ParseException {
 
-        EventParser eventParser = new EventParser(day);
+        EventParser eventParser = new EventParser(day, isActual);
         eventParser.load();
     	
         List<Event> myArrayList = eventParser.getEvents();
         System.out.println("----------------");
         
-        System.out.println("Anzahl (" + day + "): " + myArrayList.size());
+        if(isActual) {
+        	System.out.println("Anzahl aktueller Veranstaltungen (" + day + "): " + myArrayList.size());
+        }else {
+        	System.out.println("Anzahl ausgefallener Veranstaltungen (" + day + "): " + myArrayList.size());
+        }
+        
         if(myArrayList.size() != 0) {
         	
         	Session session = sessionFactory.openSession();
@@ -65,14 +70,15 @@ public class EventManager {
     }
 	
 	
-	public void addFullNew(Month startMonth, int startYear, int monthNumber) throws ParseException {
+	public void pullAllEvents(Month startMonth, int startYear, int monthNumber) throws ParseException {
 		
 		List<String> dateList = DateUtils.getListWithDay(startMonth, startYear, monthNumber);
 		
 		for(int i = 0; i < dateList.size(); i++) {
 
-			parseForDay(dateList.get(i));
-
+			parseForDay(dateList.get(i), true);
+			parseForDay(dateList.get(i), false);
+			
 		}
 		
 	}

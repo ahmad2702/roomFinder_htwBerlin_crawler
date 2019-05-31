@@ -21,6 +21,7 @@ public class EventParser {
 	
 	private String url;
 	private String date;
+	private boolean isActual;
 	
 	private final static String userAgent = "Chrome/4.0.249.0 Safari/532.5";
 	private static String tableSelector = null;
@@ -28,17 +29,22 @@ public class EventParser {
 	private Elements table = null;
 	private int size = 0;
 	
-	public EventParser(String date) {
+	public EventParser(String date, boolean isActual) {
 		new LsfData().load();
-		
 		
 		this.url = LsfData.getUrl()+
 				"?"
 				+ LsfData.getOtherParam() + "&"
-				+ LsfData.getParamActual() + "&"
 				+ LsfData.getParamForDate() + date;
 		
+		if(isActual) {
+			this.url = this.url + "&" + LsfData.getParamActual();
+		}else {
+			this.url = this.url + "&" + LsfData.getParamNotActual();
+		}
+		
 		this.date = date;
+		this.isActual = isActual;
 		tableSelector = LsfData.getTableSelector();
 		
 	}
@@ -87,9 +93,16 @@ public class EventParser {
         	int eventId = UrlUtils.getEventIdFromLink(eventLink);
         	
 	        currentEvent.setLsfId(eventId);
-	        currentEvent.setBuilding(events.get(4).text());
-	        currentEvent.setRoom(events.get(5).text());
-	        currentEvent.setLecturer(events.get(7).text());
+	        if(isActual) {
+	        	currentEvent.setBuilding(events.get(4).text());
+		        currentEvent.setRoom(events.get(5).text());
+		        currentEvent.setLecturer(events.get(7).text());
+		        currentEvent.setIsActual(1);
+	        }else {
+	        	currentEvent.setLecturer(events.get(5).text());
+	        	currentEvent.setIsActual(0);
+	        }
+	        
 	        myArrayList.add(currentEvent);
         }
 		return myArrayList;

@@ -20,7 +20,7 @@ public class CrawlerApp
         
         EventManager eventManager = new EventManager();
         eventManager.setup();
-        eventManager.addFullNew(Month.of(LsfData.getStartMonth()), LsfData.getStartYear(), 18);
+        eventManager.pullAllEvents(Month.of(LsfData.getStartMonth()), LsfData.getStartYear(), 18);
         eventManager.exit();
         
         
