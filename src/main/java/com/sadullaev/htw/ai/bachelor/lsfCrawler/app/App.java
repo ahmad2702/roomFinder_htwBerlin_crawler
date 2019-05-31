@@ -27,7 +27,7 @@ public class App
         
         EventManager eventManager = new EventManager();
         eventManager.setup();
-        eventManager.addFullNew(Month.APRIL, 2018, 1);
+        eventManager.addFullNew(Month.APRIL, 2018, 18);
         eventManager.exit();
 
         
