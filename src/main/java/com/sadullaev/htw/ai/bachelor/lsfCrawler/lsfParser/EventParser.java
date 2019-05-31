@@ -8,14 +8,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfData;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
 public class EventParser {
@@ -24,17 +23,24 @@ public class EventParser {
 	private String date;
 	
 	private final static String userAgent = "Chrome/4.0.249.0 Safari/532.5";
-	private final static String tableSelector = "body > table:nth-child(3) > tbody > tr:nth-child(1) > td:nth-child(2) > table > tbody > tr:nth-child(2) > td > table:nth-child(5)";
+	private static String tableSelector = null;
 	
 	private Elements table = null;
 	private int size = 0;
 	
 	public EventParser(String date) {
-		this.url = "https://lsf.htw-berlin.de/qisserver/rds?"
-				+ "state=currentLectures&type=0&next=CurrentLectures.vm&"
-				+ "nextdir=ressourcenManager&&HISCalendar_Date="+date+"&asi=";
+		new LsfData().load();
+		
+		
+		this.url = LsfData.getUrl()+
+				"?"
+				+ LsfData.getOtherParam() + "&"
+				+ LsfData.getParamActual() + "&"
+				+ LsfData.getParamForDate() + date;
 		
 		this.date = date;
+		tableSelector = LsfData.getTableSelector();
+		
 	}
 
 	public String getUrl() {

@@ -1,7 +1,7 @@
 # htwLsf_room_crawler
 
 events Table
-CREATE TABLE `lsf_5`.`events` (
+CREATE TABLE `bachelor`.`events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
   `begin` DATETIME NOT NULL,
