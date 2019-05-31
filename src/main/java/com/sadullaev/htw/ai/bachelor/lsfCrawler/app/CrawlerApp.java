@@ -6,7 +6,7 @@ import java.time.Month;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
-public class App 
+public class CrawlerApp 
 {
 	
     public static void main( String[] args ) throws ParseException{
@@ -15,22 +15,15 @@ public class App
         
         System.out.println( "--------------------" );
         
-
-        /** Okay
-        EventManager eventManager = new EventManager();
-        eventManager.setup();
-        //eventManager.create();
-        //eventManager.addFull();
-        eventManager.exit();
-		*/
         
         
         EventManager eventManager = new EventManager();
         eventManager.setup();
         eventManager.addFullNew(Month.APRIL, 2018, 18);
         eventManager.exit();
-
+		
         
+        //Month month = Month.of(2);
         
         
         System.out.println( "--------------------" );
