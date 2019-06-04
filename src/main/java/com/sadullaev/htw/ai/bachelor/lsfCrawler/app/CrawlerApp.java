@@ -24,7 +24,8 @@ public class CrawlerApp
         // FUll load
         EventManager eventManager = new EventManager();
         eventManager.setup();
-        eventManager.pullAllEvents(DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate()));
+        List<String> allDate = DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate());
+        eventManager.pullAllEvents(allDate);
         eventManager.exit();
         
         /**

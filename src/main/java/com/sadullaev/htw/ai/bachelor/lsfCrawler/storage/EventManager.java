@@ -38,47 +38,51 @@ public class EventManager {
 	public void exit() {
 		sessionFactory.close();
     }
- 
-	private void parseForDay(String day, boolean isActual) throws ParseException {
-
-        EventParser eventParser = new EventParser(day, isActual);
+	
+	private List<Event> parseAndGetEvents(String day, boolean isActual) throws ParseException{
+		EventParser eventParser = new EventParser(day, isActual);
         eventParser.load();
     	
         List<Event> myArrayList = eventParser.getEvents();
-        System.out.println("----------------");
-        
-        if(isActual) {
-        	System.out.println("Anzahl aktueller Veranstaltungen (" + day + "): " + myArrayList.size());
-        }else {
-        	System.out.println("Anzahl ausgefallener Veranstaltungen (" + day + "): " + myArrayList.size());
-        }
+		return myArrayList;
+	}
+ 
+	private void add(List<Event> myArrayList) {
         
         if(myArrayList.size() != 0) {
         	
         	Session session = sessionFactory.openSession();
-	        System.out.println(day + " save to database...");
+	        System.out.println("Save to database...");
 	        
 	        for(Event event : myArrayList) {
 	        	session.beginTransaction();
 	        	session.save(event);
 	        	session.getTransaction().commit();
 	        }
-	        System.out.println(day + " is done.");
+	        System.out.println("Done.");
 	
 	        session.close();
 
         }
-        
-        System.out.println("----------------");
+
     }
 	
 	
 	public void pullAllEvents(List<String> dateList) throws ParseException {
 
 		for(int i = 0; i < dateList.size(); i++) {
-
-			parseForDay(dateList.get(i), true);
-			parseForDay(dateList.get(i), false);
+			
+			System.out.println("----------------");
+			List<Event> aktuelle = parseAndGetEvents(dateList.get(i), true);
+			System.out.println("Anzahl aktueller Veranstaltungen (" + dateList.get(i) + "): " + aktuelle.size());
+	        add(aktuelle);
+	        System.out.println("----------------");
+			
+	        System.out.println("----------------");
+			List<Event> ausgefallene = parseAndGetEvents(dateList.get(i), false);
+			System.out.println("Anzahl ausgefallener Veranstaltungen (" + dateList.get(i) + "): " + ausgefallene.size());
+			add(ausgefallene);
+			System.out.println("----------------");
 			
 		}
 		
@@ -92,8 +96,8 @@ public class EventManager {
  
 	public void update(List<String> date, boolean isActual) throws ParseException {
 		
-		/**
 		
+		/**
 		EventParser eventParser = new EventParser(startDate, isActual);
         eventParser.load();
 
@@ -122,8 +126,8 @@ public class EventManager {
 	    
 	    System.out.println("For add: " + newList);
 	    System.out.println("For Update: " + oldList); 
-	    */
 	    
+	    */
     }
  
 	public void delete() {
