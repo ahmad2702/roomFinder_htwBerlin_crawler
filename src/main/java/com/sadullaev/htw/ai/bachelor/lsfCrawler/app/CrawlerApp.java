@@ -1,10 +1,13 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfData;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
 public class CrawlerApp 
@@ -21,7 +24,7 @@ public class CrawlerApp
         // FUll load
         EventManager eventManager = new EventManager();
         eventManager.setup();
-        eventManager.pullAllEvents(Month.of(LsfData.getStartMonth()), LsfData.getStartYear(), 18);
+        eventManager.pullAllEvents(DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate()));
         eventManager.exit();
         
         /**
@@ -32,6 +35,11 @@ public class CrawlerApp
         eventManager.exit();
         */
         
+        List<String> aaaList = DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate());
+        System.out.println(aaaList);
+        
+        List<String> aaaList111 = DateUtils.getDatesBetweenNowAndDate(LsfData.getEndDate());
+        System.out.println(aaaList111);
         
         System.out.println( "--------------------" );
         System.out.println( "Program is closed." );

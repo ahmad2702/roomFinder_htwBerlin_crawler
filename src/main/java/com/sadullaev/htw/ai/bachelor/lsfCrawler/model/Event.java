@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "events")
+@Table(name = "test_events")
 public class Event {
 	
 	@Id
@@ -140,6 +140,26 @@ public class Event {
 	public void setIsActual(int isActual) {
 		this.isActual = isActual;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if(obj==null) return false;
+        if (!(obj instanceof Event))
+            return false;
+        if (obj == this)
+            return true;
+        return this.getName().equals(((Event)obj).getName()) &&
+        		this.getDate()==((Event)obj).getDate() &&
+        		this.getBegin()==((Event)obj).getBegin() &&
+        		this.getEnd()==((Event)obj).getEnd() &&
+        		this.getLsfNr().equals(((Event)obj).getLsfNr()) &&
+        		this.getLsfId()==((Event)obj).getLsfId() &&
+        		this.getBuilding().equals(((Event)obj).getBuilding()) &&
+        		this.getRoom().equals(((Event)obj).getRoom()) &&
+        		this.getLecturer().equals(((Event)obj).getLecturer()) &&
+        		this.getIsActual()==((Event)obj).getIsActual()
+        		;
+    }
 
 	@Override
 	public String toString() {

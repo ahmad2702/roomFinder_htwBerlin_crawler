@@ -12,8 +12,8 @@ public class LsfData {
 	private static String paramActual;
 	private static String paramNotActual;
 	private static String paramForDate;
-	private static String startYear;
-	private static String startMonth;
+	private static String startDate;
+	private static String endDate;
 	private static String tableSelector;
 	
 	public static void load() {
@@ -29,8 +29,8 @@ public class LsfData {
             paramNotActual = property.getProperty("param_not_actual");
             
             paramForDate = property.getProperty("param_for_date");
-            startYear = property.getProperty("start_year");
-            startMonth = property.getProperty("start_month");
+            startDate = property.getProperty("start_date");
+            endDate = property.getProperty("end_date");
             
             tableSelector = property.getProperty("table_selector");
 
@@ -60,12 +60,12 @@ public class LsfData {
 		return paramForDate;
 	}
 
-	public static int getStartYear() {
-		return Integer.parseInt(startYear);
+	public static String getStartDate() {
+		return startDate;
 	}
 
-	public static int getStartMonth() {
-		return Integer.parseInt(startMonth);
+	public static String getEndDate() {
+		return endDate;
 	}
 
 	public static String getTableSelector() {

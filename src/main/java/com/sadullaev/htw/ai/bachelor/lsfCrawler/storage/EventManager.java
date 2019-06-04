@@ -17,6 +17,7 @@ import org.hibernate.transform.Transformers;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.HibernateUtil;
 
 public class EventManager {
 	
@@ -72,10 +73,8 @@ public class EventManager {
     }
 	
 	
-	public void pullAllEvents(Month startMonth, int startYear, int monthNumber) throws ParseException {
-		
-		List<String> dateList = DateUtils.getListWithDay(startMonth, startYear, monthNumber);
-		
+	public void pullAllEvents(List<String> dateList) throws ParseException {
+
 		for(int i = 0; i < dateList.size(); i++) {
 
 			parseForDay(dateList.get(i), true);
@@ -88,18 +87,43 @@ public class EventManager {
 	public void read() {
         // code to get a book
     }
+	
+	
  
-	public void update(String day, boolean isActual) throws ParseException {
-		//EventParser eventParser = new EventParser(day, isActual);
-        //eventParser.load();
+	public void update(List<String> date, boolean isActual) throws ParseException {
+		
+		/**
+		
+		EventParser eventParser = new EventParser(startDate, isActual);
+        eventParser.load();
 
         //List<Event> myArrayList = eventParser.getEvents();
         
         Session session = sessionFactory.openSession();        
-        String hql = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='2018-04-06' and is_actual=0";
-        List<Event> list = session.createQuery(hql).list();
         
-        System.out.println(list);
+        String oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where is_actual=1";
+        List<Event> oldList = session.createQuery(oldSqlQuery).list();
+        
+        
+        String newSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='2018-04-06' and is_actual=0";
+        List<Event> newList = session.createQuery(newSqlQuery).list();
+        
+        
+        List<Event> duplikate = HibernateUtil.getDuplikate(newList, oldList);
+	    System.out.println("Duplikate: " + duplikate); 
+	    
+	    if(duplikate.size()!=0) {
+	    	newList.removeAll(duplikate);
+	    	oldList.removeAll(duplikate);
+	    }else {
+	    	oldList = new ArrayList<Event>();
+	    }
+        
+	    
+	    System.out.println("For add: " + newList);
+	    System.out.println("For Update: " + oldList); 
+	    */
+	    
     }
  
 	public void delete() {
