@@ -6,10 +6,10 @@
 <hibernate-configuration>
  
   <session-factory>
-    <property name="connection.url">jdbc:mysql://192.168.0.85:3306/bachelor</property>
+    <property name="connection.url">jdbc:mysql://db.f4.htw-berlin.de:3306/_s0556420__bachelor</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.username">user1</property>
-    <property name="connection.password">indigo27</property>
+    <property name="connection.username">s0556420</property>
+    <property name="connection.password">1KcNmpmS255XRnu30vhN</property>
     <property name="show_sql">false</property> 
     <!--<property name="format_sql">true</property>-->
 

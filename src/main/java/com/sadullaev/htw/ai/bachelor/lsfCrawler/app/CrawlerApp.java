@@ -18,11 +18,19 @@ public class CrawlerApp
         new LsfData().load();
         
         
+        // FUll load
         EventManager eventManager = new EventManager();
         eventManager.setup();
         eventManager.pullAllEvents(Month.of(LsfData.getStartMonth()), LsfData.getStartYear(), 18);
         eventManager.exit();
         
+        /**
+        // Update
+        EventManager eventManager = new EventManager();
+        eventManager.setup();
+        eventManager.update("06.04.2018", false);
+        eventManager.exit();
+        */
         
         
         System.out.println( "--------------------" );

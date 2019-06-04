@@ -2,9 +2,9 @@
 ##############################
 
 #Table: events
-CREATE SCHEMA `bachelor` ;
+CREATE SCHEMA `_s0556420__bachelor` ;
 
-CREATE TABLE `bachelor`.`events` (
+CREATE TABLE `_s0556420__bachelor`.`events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
   `begin` DATETIME NOT NULL,

@@ -143,9 +143,12 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [date=" + date + ", begin=" + begin + ", end=" + end + ", lsfNr=" + lsfNr + ", name=" + name
-				+ ", lsfId=" + lsfId + ", building=" + building + ", room=" + room + ", lecturer=" + lecturer + "]";
+		return "Event [id=" + id + ", date=" + date + ", begin=" + begin + ", end=" + end + ", lsfNr=" + lsfNr
+				+ ", name=" + name + ", lsfId=" + lsfId + ", building=" + building + ", room=" + room + ", lecturer="
+				+ lecturer + ", isActual=" + isActual + "]";
 	}
+
+	
 	
 	
 	

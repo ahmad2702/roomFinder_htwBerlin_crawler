@@ -11,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
@@ -87,8 +89,17 @@ public class EventManager {
         // code to get a book
     }
  
-	public void update() {
-        // code to modify a book
+	public void update(String day, boolean isActual) throws ParseException {
+		//EventParser eventParser = new EventParser(day, isActual);
+        //eventParser.load();
+
+        //List<Event> myArrayList = eventParser.getEvents();
+        
+        Session session = sessionFactory.openSession();        
+        String hql = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='2018-04-06' and is_actual=0";
+        List<Event> list = session.createQuery(hql).list();
+        
+        System.out.println(list);
     }
  
 	public void delete() {
