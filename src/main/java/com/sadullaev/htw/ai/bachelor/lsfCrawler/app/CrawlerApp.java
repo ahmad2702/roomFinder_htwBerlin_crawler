@@ -20,28 +20,23 @@ public class CrawlerApp
         
         new LsfData().load();
         
-        
+        /**
         // FUll load
         EventManager eventManager = new EventManager();
         eventManager.setup();
         List<String> allDate = DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate());
         eventManager.pullAllEvents(allDate);
         eventManager.exit();
+        */
         
-        /**
         // Update
         EventManager eventManager = new EventManager();
         eventManager.setup();
-        eventManager.update("06.04.2018", false);
+        List<String> allDate = DateUtils.getDatesBetweenNowAndDate(LsfData.getEndDate());
+        eventManager.updateLastEvents(allDate, true);
         eventManager.exit();
-        */
         
-        List<String> aaaList = DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate());
-        System.out.println(aaaList);
-        
-        List<String> aaaList111 = DateUtils.getDatesBetweenNowAndDate(LsfData.getEndDate());
-        System.out.println(aaaList111);
-        
+
         System.out.println( "--------------------" );
         System.out.println( "Program is closed." );
         

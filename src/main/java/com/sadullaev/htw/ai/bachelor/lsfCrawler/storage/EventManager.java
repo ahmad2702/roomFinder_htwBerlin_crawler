@@ -46,7 +46,8 @@ public class EventManager {
         List<Event> myArrayList = eventParser.getEvents();
 		return myArrayList;
 	}
- 
+	
+	// Add new Element into DB
 	private void add(List<Event> myArrayList) {
         
         if(myArrayList.size() != 0) {
@@ -56,6 +57,7 @@ public class EventManager {
 	        
 	        for(Event event : myArrayList) {
 	        	session.beginTransaction();
+	        	System.out.println("-> Name: " + event.getName());
 	        	session.save(event);
 	        	session.getTransaction().commit();
 	        }
@@ -88,46 +90,75 @@ public class EventManager {
 		
 	}
  
-	public void read() {
-        // code to get a book
-    }
-	
-	
- 
-	public void update(List<String> date, boolean isActual) throws ParseException {
-		
-		
-		/**
-		EventParser eventParser = new EventParser(startDate, isActual);
-        eventParser.load();
+	private List<Event> read(String day, boolean isActual) {
+		String dayFormatted = DateUtils.getDateFormatForSql(day);
 
-        //List<Event> myArrayList = eventParser.getEvents();
+		Session session = sessionFactory.openSession();    
+		
+		String oldSqlQuery = "";
+		if(isActual) {
+			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='"+dayFormatted+"' and is_actual=1";
+		} else {
+			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='"+dayFormatted+"' and is_actual=0";
+		}
         
-        Session session = sessionFactory.openSession();        
-        
-        String oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where is_actual=1";
         List<Event> oldList = session.createQuery(oldSqlQuery).list();
         
+        session.close();
         
-        String newSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='2018-04-06' and is_actual=0";
-        List<Event> newList = session.createQuery(newSqlQuery).list();
+        return oldList;
+    }
+	
+	// Update old Element into DB
+	private void update(List<Event> myArrayList) {
         
+        if(myArrayList.size() != 0) {
+        	
+        	Session session = sessionFactory.openSession();
+	        System.out.println("Update...");
+	        
+	        for(Event event : myArrayList) {
+	        	session.beginTransaction();
+	        	System.out.println("-> Id: " + event.getId());
+	        	session.update(event);
+	        	session.getTransaction().commit();
+	        }
+	        System.out.println("Done.");
+	
+	        session.close();
+
+        }
+
+    }	
+ 
+	public void updateLastEvents(List<String> date, boolean isActual) throws ParseException {
+		
+		for(int i = 0; i < date.size(); i++) {
+			List<Event> oldList = read(date.get(i), isActual);
+	        List<Event> newList = parseAndGetEvents(date.get(i), isActual);
+	        
+	        List<Event> duplikate = HibernateUtil.getDuplikate(newList, oldList);
+		    //System.out.println("Duplikate: " + duplikate); 
+		    
+		    if(duplikate.size()!=0) {
+		    	newList.removeAll(duplikate);
+		    	oldList.removeAll(duplikate);
+		    }
+	        oldList.forEach(x-> x.setIsActual(0));
+		    
+	        System.out.println("-----------------------------------------");
+		    System.out.println("Neue Veranstaltungen ("+date.get(i)+"): " + newList.size());
+		    add(newList);
+		    System.out.println("-----------------------------------------");
+		    
+		    System.out.println("-----------------------------------------");
+		    System.out.println("Ausgefallene Veranstaltungen ("+date.get(i)+"): " + oldList.size()); 
+		    update(oldList);
+		    System.out.println("-----------------------------------------");
+		}
         
-        List<Event> duplikate = HibernateUtil.getDuplikate(newList, oldList);
-	    System.out.println("Duplikate: " + duplikate); 
 	    
-	    if(duplikate.size()!=0) {
-	    	newList.removeAll(duplikate);
-	    	oldList.removeAll(duplikate);
-	    }else {
-	    	oldList = new ArrayList<Event>();
-	    }
-        
 	    
-	    System.out.println("For add: " + newList);
-	    System.out.println("For Update: " + oldList); 
-	    
-	    */
     }
  
 	public void delete() {

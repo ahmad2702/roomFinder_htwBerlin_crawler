@@ -149,11 +149,8 @@ public class Event {
         if (obj == this)
             return true;
         return this.getName().equals(((Event)obj).getName()) &&
-        		this.getDate()==((Event)obj).getDate() &&
-        		this.getBegin()==((Event)obj).getBegin() &&
-        		this.getEnd()==((Event)obj).getEnd() &&
-        		this.getLsfNr().equals(((Event)obj).getLsfNr()) &&
-        		this.getLsfId()==((Event)obj).getLsfId() &&
+        		this.getBegin().getTime()==((Event)obj).getBegin().getTime() &&
+        		this.getEnd().getTime()==((Event)obj).getEnd().getTime() &&
         		this.getBuilding().equals(((Event)obj).getBuilding()) &&
         		this.getRoom().equals(((Event)obj).getRoom()) &&
         		this.getLecturer().equals(((Event)obj).getLecturer()) &&
