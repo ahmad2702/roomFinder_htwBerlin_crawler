@@ -79,7 +79,7 @@ public class EventParser {
         	String start = this.date + " " + events.get(0).text();
         	String end = this.date + " " + events.get(1).text();
         	
-        	DateFormat format_1 = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        	DateFormat format_1 = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         	Timestamp startDate = new Timestamp(format_1.parse(start).getTime());
         	Timestamp endDate = new Timestamp(format_1.parse(end).getTime());
         	

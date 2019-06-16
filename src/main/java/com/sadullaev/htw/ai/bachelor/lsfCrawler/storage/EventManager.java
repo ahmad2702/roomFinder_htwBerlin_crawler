@@ -39,7 +39,7 @@ public class EventManager {
 		sessionFactory.close();
     }
 	
-	private List<Event> parseAndGetEvents(String day, boolean isActual) throws ParseException{
+	public List<Event> parseAndGetEvents(String day, boolean isActual) throws ParseException{
 		EventParser eventParser = new EventParser(day, isActual);
         eventParser.load();
     	
@@ -57,12 +57,12 @@ public class EventManager {
 	        
 	        for(Event event : myArrayList) {
 	        	session.beginTransaction();
-	        	System.out.println("-> Name: " + event.getName());
+	        	//System.out.println("-> Name: " + event.getName());
 	        	session.save(event);
 	        	session.getTransaction().commit();
 	        }
 	        System.out.println("Done.");
-	
+	        
 	        session.close();
 
         }

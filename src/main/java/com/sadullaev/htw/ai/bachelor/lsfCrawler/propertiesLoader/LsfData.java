@@ -15,6 +15,7 @@ public class LsfData {
 	private static String startDate;
 	private static String endDate;
 	private static String tableSelector;
+	private static int option;
 	
 	public static void load() {
 		
@@ -33,6 +34,8 @@ public class LsfData {
             endDate = property.getProperty("end_date");
             
             tableSelector = property.getProperty("table_selector");
+            
+            option = Integer.parseInt(property.getProperty("option"));
 
         } catch (IOException e) {
             System.err.println("Properties fuer LSF nicht gefunden!");
@@ -71,5 +74,11 @@ public class LsfData {
 	public static String getTableSelector() {
 		return tableSelector;
 	}
+
+	public static int getOption() {
+		return option;
+	}
+	
+	
 
 }
