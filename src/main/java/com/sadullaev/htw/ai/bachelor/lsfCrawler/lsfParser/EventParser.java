@@ -87,7 +87,7 @@ public class EventParser {
         	currentEvent.setBegin(startDate);
         	currentEvent.setEnd(endDate);
         	currentEvent.setLsfNr(events.get(2).text());
-        	currentEvent.setName(events.get(3).text());
+        	currentEvent.setName(events.get(3).text().replaceAll("\u0092", "").replaceAll("\u0096", ""));
         	
         	String eventLink = events.get(3).select("a").first().attr("abs:href");
         	int eventId = UrlUtils.getEventIdFromLink(eventLink);
