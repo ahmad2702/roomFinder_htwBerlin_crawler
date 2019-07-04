@@ -30,7 +30,8 @@ public class EventParser {
 	private int size = 0;
 	
 	public EventParser(String date, boolean isActual) {
-		new LsfData().load();
+		new LsfData();
+		LsfData.load();
 		
 		this.url = LsfData.getUrl()+
 				"?"

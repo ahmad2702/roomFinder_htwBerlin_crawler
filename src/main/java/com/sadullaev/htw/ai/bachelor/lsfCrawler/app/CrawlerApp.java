@@ -1,16 +1,11 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.Arrays;
 import java.util.List;
 
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfData;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
 public class CrawlerApp 
 {
@@ -20,7 +15,8 @@ public class CrawlerApp
         System.out.println( "Program is started." );
         System.out.println( "--------------------" );
         
-        new LsfData().load();
+        new LsfData();
+		LsfData.load();
         
         EventManager eventManager = new EventManager();
     	eventManager.setup();

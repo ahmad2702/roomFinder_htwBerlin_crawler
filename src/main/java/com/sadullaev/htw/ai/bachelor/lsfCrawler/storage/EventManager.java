@@ -1,9 +1,6 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.storage;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,8 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.query.Query;
-import org.hibernate.transform.Transformers;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
  
 public class HibernateUtil {
