@@ -3,7 +3,7 @@ package com.sadullaev.htw.ai.bachelor.lsfCrawler.app;
 import java.text.ParseException;
 import java.util.List;
 
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfData;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfConfiguration;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
 
@@ -21,22 +21,21 @@ public class CrawlerApp
         
         
         // load the properties/configs
-        new LsfData();
-		LsfData.load();
+        new LsfConfiguration();
         
 		// running and configuring hibernate for transaction
         EventManager eventManager = new EventManager();
     	eventManager.setup();
         
         // selecting operation
-        if(LsfData.getOption()==1) {
+        if(LsfConfiguration.getOption()==1) {
         	// load all events
-        	List<String> allDate = DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate());
+        	List<String> allDate = DateUtils.getDatesBetweenTwoDates(LsfConfiguration.getStartDate(), LsfConfiguration.getEndDate());
         	eventManager.pullAllEvents(allDate);
         	
-        }else if(LsfData.getOption()==2) {
+        }else if(LsfConfiguration.getOption()==2) {
         	// update existing events
-        	List<String> allDate = DateUtils.getDatesBetweenNowAndDate(LsfData.getEndDate());
+        	List<String> allDate = DateUtils.getDatesBetweenNowAndDate(LsfConfiguration.getEndDate());
         	eventManager.updateLastEvents(allDate, true);
         	
         }

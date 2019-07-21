@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class LsfData {
+public class LsfConfiguration {
 	
 	static Properties property = new Properties();
 	private static String url;
@@ -18,10 +18,14 @@ public class LsfData {
 	private static int option;
 	
 	
-	public static void load() {
+	public LsfConfiguration() {
+		load();
+	}
+	
+	private static void load() {
 		
 		try {
-            InputStream input = LsfData.class.getClassLoader().getResourceAsStream("lsf.properties");
+            InputStream input = LsfConfiguration.class.getClassLoader().getResourceAsStream("lsf.properties");
             property.load(input);
 
             url = property.getProperty("url");

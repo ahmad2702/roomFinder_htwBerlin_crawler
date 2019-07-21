@@ -14,7 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfData;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfConfiguration;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
 public class EventParser {
@@ -29,44 +29,73 @@ public class EventParser {
 	 */
 	private String url;
 	
+	/**
+	 * Date to parse
+	 */
 	private String date;
 	
+	/**
+	 * actual(true) or canceled events(false)
+	 */
 	private boolean isActual;
 	
+	/**
+	 * Path to the table 
+	 */
 	private static String tableSelector = null;
 	
+	/**
+	 * Table with events from page 
+	 */
 	private Elements table = null;
+	
+	/**
+	 * Number of events
+	 */
 	private int size = 0;
 	
+	
+	/**
+	 * Constructor with parameters for parsing
+	 * @param date to be entered into the URL
+	 * @param isActual: actual(true) or canceled events(false)
+	 */
 	public EventParser(String date, boolean isActual) {
-		new LsfData();
-		LsfData.load();
-		
-		this.url = LsfData.getUrl()+
+		this.url = LsfConfiguration.getUrl()+
 				"?"
-				+ LsfData.getOtherParam() + "&"
-				+ LsfData.getParamForDate() + date;
+				+ LsfConfiguration.getOtherParam() + "&"
+				+ LsfConfiguration.getParamForDate() + date;
 		
 		if(isActual) {
-			this.url = this.url + "&" + LsfData.getParamActual();
+			this.url = this.url + "&" + LsfConfiguration.getParamActual();
 		}else {
-			this.url = this.url + "&" + LsfData.getParamNotActual();
+			this.url = this.url + "&" + LsfConfiguration.getParamNotActual();
 		}
 		
 		this.date = date;
 		this.isActual = isActual;
-		tableSelector = LsfData.getTableSelector();
+		tableSelector = LsfConfiguration.getTableSelector();
 		
 	}
 
+	/**
+	 * @return url of page
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/**
+	 * change url of page
+	 * @param url
+	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 	
+	/**
+	 * Loading the table with events from the page
+	 */
 	public void load() {
 		try {
 			Document pageElements = Jsoup.connect(url).userAgent(USER_AGENT).timeout(10 * 1000).get();
@@ -76,12 +105,16 @@ public class EventParser {
         	this.table.remove(0);
         	this.size = table.size();
         } catch (IOException e) {
-        	e.printStackTrace();
+        	System.out.println("Die Seite kann nicht geoffnet werden.");
         }
 	}
 	
+	/**
+	 * Get events as list
+	 * @return event list
+	 */
 	public List<Event> getEvents() throws ParseException {
-		List<Event> myArrayList = new ArrayList<Event>();
+		List<Event> eventList = new ArrayList<Event>();
 		for(int i = 0; i < size; i++) {
 			Elements events = table.get(i).select("td");
         	Event currentEvent = new Event(); 
@@ -113,15 +146,21 @@ public class EventParser {
 	        	currentEvent.setIsActual(0);
 	        }
 	        
-	        myArrayList.add(currentEvent);
+	        eventList.add(currentEvent);
         }
-		return myArrayList;
+		return eventList;
 	}
 
+	/**
+	 * @return table with events
+	 */
 	public Elements getDoc() {
 		return table;
 	}
 
+	/**
+	 * @return number of events
+	 */
 	public int getSize() {
 		return size;
 	}
