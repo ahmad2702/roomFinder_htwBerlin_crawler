@@ -154,8 +154,7 @@ public class Event {
         		this.getBuilding().equals(((Event)obj).getBuilding()) &&
         		this.getRoom().equals(((Event)obj).getRoom()) &&
         		this.getLecturer().equals(((Event)obj).getLecturer()) &&
-        		this.getIsActual()==((Event)obj).getIsActual()
-        		;
+        		this.getIsActual()==((Event)obj).getIsActual();
     }
 
 	@Override
@@ -165,12 +164,4 @@ public class Event {
 				+ lecturer + ", isActual=" + isActual + "]";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 }

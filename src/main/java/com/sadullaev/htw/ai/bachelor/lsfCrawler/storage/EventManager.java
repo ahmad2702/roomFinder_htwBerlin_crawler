@@ -14,10 +14,17 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.HibernateUtil;
 
-public class EventManager {
+public class EventManager implements EventManagerInterface{
 	
+	/**
+	 * Factory for session objects
+	 */
 	protected SessionFactory sessionFactory;
 	
+	
+	/**
+	 * running and configuring hibernate for transaction
+	 */
 	public void setup() {
 		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
 		        .configure() // configures settings from hibernate.cfg.xml
@@ -27,44 +34,15 @@ public class EventManager {
 		} catch (Exception ex) {
 		    StandardServiceRegistryBuilder.destroy(registry);
 		    System.out.println("Datenbank wurde nicht gefunden.");
+		    System.exit(1);
 		}
     }
 	
-	public void exit() {
-		sessionFactory.close();
-    }
 	
-	public List<Event> parseAndGetEvents(String day, boolean isActual) throws ParseException{
-		EventParser eventParser = new EventParser(day, isActual);
-        eventParser.load();
-    	
-        List<Event> myArrayList = eventParser.getEvents();
-		return myArrayList;
-	}
-	
-	// Add new Element into DB
-	private void add(List<Event> myArrayList) {
-        
-        if(myArrayList.size() != 0) {
-        	
-        	Session session = sessionFactory.openSession();
-	        System.out.println("Save to database...");
-	        
-	        for(Event event : myArrayList) {
-	        	session.beginTransaction();
-	        	//System.out.println("-> Name: " + event.getName());
-	        	session.save(event);
-	        	session.getTransaction().commit();
-	        }
-	        System.out.println("Done.");
-	        
-	        session.close();
-
-        }
-
-    }
-	
-	
+	/**
+	 * Start: Load all events function
+	 * @param dateList: date(s) to be entered into the URL
+	 */
 	public void pullAllEvents(List<String> dateList) throws ParseException {
 
 		for(int i = 0; i < dateList.size(); i++) {
@@ -75,6 +53,7 @@ public class EventManager {
 	        add(aktuelle);
 	        System.out.println("----------------");
 			
+	        
 	        System.out.println("----------------");
 			List<Event> ausgefallene = parseAndGetEvents(dateList.get(i), false);
 			System.out.println("Anzahl ausgefallener Veranstaltungen (" + dateList.get(i) + "): " + ausgefallene.size());
@@ -84,48 +63,50 @@ public class EventManager {
 		}
 		
 	}
- 
-	private List<Event> read(String day, boolean isActual) {
-		String dayFormatted = DateUtils.getDateFormatForSql(day);
-
-		Session session = sessionFactory.openSession();    
-		
-		String oldSqlQuery = "";
-		if(isActual) {
-			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='"+dayFormatted+"' and is_actual=1";
-		} else {
-			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='"+dayFormatted+"' and is_actual=0";
-		}
-        
-        List<Event> oldList = session.createQuery(oldSqlQuery).list();
-        
-        session.close();
-        
-        return oldList;
-    }
 	
-	// Update old Element into DB
-	private void update(List<Event> myArrayList) {
-        
-        if(myArrayList.size() != 0) {
+	
+	/**
+	 * Loading events for a specific day
+	 * @param day
+	 * @param isActual: actual or canceled events
+	 * @return events as list
+	 */
+	private List<Event> parseAndGetEvents(String day, boolean isActual) throws ParseException{
+		EventParser eventParser = new EventParser(day, isActual);
+        eventParser.load();
+    	
+        List<Event> events = eventParser.getEvents();
+		return events;
+	}
+	
+	
+	/**
+	 * Saving events to database
+	 * @param events as list
+	 */
+	private void add(List<Event> events) {
+        if(events.size() != 0) {
         	
         	Session session = sessionFactory.openSession();
-	        System.out.println("Update...");
+	        System.out.println("Saving events to database...");
 	        
-	        for(Event event : myArrayList) {
+	        for(Event event : events) {
 	        	session.beginTransaction();
-	        	System.out.println("-> Id: " + event.getId());
-	        	session.update(event);
+	        	session.save(event);
 	        	session.getTransaction().commit();
 	        }
-	        System.out.println("Done.");
-	
+	        
 	        session.close();
+	        System.out.println("Finished.");
 
         }
-
-    }	
- 
+    }
+	
+	/**
+	 * Start: Update existing events
+	 * @param date: date(s) to be entered into the URL
+	 * @param isActual: actual or canceled events
+	 */
 	public void updateLastEvents(List<String> date, boolean isActual) throws ParseException {
 		
 		for(int i = 0; i < date.size(); i++) {
@@ -133,7 +114,6 @@ public class EventManager {
 	        List<Event> newList = parseAndGetEvents(date.get(i), isActual);
 	        
 	        List<Event> duplikate = HibernateUtil.getDuplikate(newList, oldList);
-		    //System.out.println("Duplikate: " + duplikate); 
 		    
 		    if(duplikate.size()!=0) {
 		    	newList.removeAll(duplikate);
@@ -151,14 +131,63 @@ public class EventManager {
 		    update(oldList);
 		    System.out.println("-----------------------------------------");
 		}
-        
-	    
-	    
+
     }
  
-	public void delete() {
-        // code to remove a book
+	/**
+	 * Read events for a specific day
+	 * @param day
+	 * @param isActual: actual or canceled events
+	 * @return events from database
+	 */
+	private List<Event> read(String day, boolean isActual) {
+		String dayFormatted = DateUtils.getDateFormatForSql(day);
+
+		Session session = sessionFactory.openSession();    
+		
+		String oldSqlQuery = "";
+		if(isActual) {
+			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='" + dayFormatted + "' and is_actual=1";
+		} else {
+			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='" + dayFormatted + "' and is_actual=0";
+		}
+        
+        List<Event> eventsFromDatabase = session.createQuery(oldSqlQuery).list();
+        
+        session.close();
+        
+        return eventsFromDatabase;
     }
 	
+	
+	/**
+	 * Update existing events into database
+	 * @param events as list
+	 */
+	private void update(List<Event> events) {      
+        if(events.size() != 0) {
+        	
+        	Session session = sessionFactory.openSession();
+	        System.out.println("Updating...");
+	        
+	        for(Event event : events) {
+	        	session.beginTransaction();
+	        	System.out.println("-> Id: " + event.getId());
+	        	session.update(event);
+	        	session.getTransaction().commit();
+	        }
+	        
+	        session.close();
+	        System.out.println("Finished.");
+        }
+    }	
+
+	
+	/**
+	 * stopping hibernate
+	 */
+	public void exit() {
+		sessionFactory.close();
+    }
 	
 }

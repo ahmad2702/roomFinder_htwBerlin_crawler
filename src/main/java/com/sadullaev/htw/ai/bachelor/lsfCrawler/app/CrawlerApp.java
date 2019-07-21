@@ -10,45 +10,45 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
 public class CrawlerApp 
 {
 	
+	/**
+	 * Launching LSF-Crawler
+	 */
     public static void main( String[] args ) throws ParseException{
     	
-        System.out.println( "Program is started." );
+        System.out.println( "LSF-Crawler is running..." );
         System.out.println( "--------------------" );
         
+        
+        
+        // load the properties/configs
         new LsfData();
 		LsfData.load();
         
+		// running and configuring hibernate for transaction
         EventManager eventManager = new EventManager();
     	eventManager.setup();
         
-        
+        // selecting operation
         if(LsfData.getOption()==1) {
-        	// FUll load
+        	// load all events
         	List<String> allDate = DateUtils.getDatesBetweenTwoDates(LsfData.getStartDate(), LsfData.getEndDate());
         	eventManager.pullAllEvents(allDate);
+        	
         }else if(LsfData.getOption()==2) {
-        	// Update
+        	// update existing events
         	List<String> allDate = DateUtils.getDatesBetweenNowAndDate(LsfData.getEndDate());
         	eventManager.updateLastEvents(allDate, true);
+        	
         }
         
+        // stopping hibernate
         eventManager.exit();
         
         
-
-        
-        
-        /**
-        //For Tests only
-        EventManager eventManager = new EventManager();
-        eventManager.setup();
-        List<Event> aaaEvents = eventManager.parseAndGetEvents("09.07.2019", true);
-        System.out.println(Arrays.toString(aaaEvents.toArray()));
-        */
         
         
         System.out.println( "--------------------" );
-        System.out.println( "Program is closed." );
+        System.out.println( "LSF-Crawler is finished." );
         
     }
     

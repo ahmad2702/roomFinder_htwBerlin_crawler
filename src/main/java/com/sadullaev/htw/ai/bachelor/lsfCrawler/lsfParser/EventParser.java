@@ -19,11 +19,20 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
 
 public class EventParser {
 	
+	/**
+	 * Browser User Agent
+	 */
+	private final static String USER_AGENT = "Chrome/4.0.249.0 Safari/532.5";
+	
+	/**
+	 * URL of page
+	 */
 	private String url;
+	
 	private String date;
+	
 	private boolean isActual;
 	
-	private final static String userAgent = "Chrome/4.0.249.0 Safari/532.5";
 	private static String tableSelector = null;
 	
 	private Elements table = null;
@@ -60,7 +69,7 @@ public class EventParser {
 	
 	public void load() {
 		try {
-			Document pageElements = Jsoup.connect(url).userAgent(userAgent).timeout(10 * 1000).get();
+			Document pageElements = Jsoup.connect(url).userAgent(USER_AGENT).timeout(10 * 1000).get();
         	Elements tableWithData = pageElements.select(tableSelector);
         	this.table = tableWithData.select("tr");
         	
