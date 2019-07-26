@@ -32,16 +32,12 @@ public class DateUtilsTest {
 		dateListForFullPull.add("06.07.2019");
 		dateListForFullPull.add("07.07.2019");
 		
-		
 		LocalDate localDate = LocalDate.now();
 		for(int i = 0; i<7; i++) {
-			
-			if(localDate.getMonthValue() < 10) {
-				dateListForUpdate.add(localDate.getDayOfMonth() + ".0" + localDate.getMonthValue() + "." + localDate.getYear());
-			}else {
-				dateListForUpdate.add(localDate.getDayOfMonth() + "." + localDate.getMonthValue() + "." + localDate.getYear());
-			}
+			String day  = (localDate.getDayOfMonth() < 10)? ("0" + localDate.getDayOfMonth()) : ("" + localDate.getDayOfMonth());
+			String month  = (localDate.getMonthValue() < 10)? ("0" + localDate.getMonthValue()) : ("" + localDate.getMonthValue());
 
+			dateListForUpdate.add(day + "." + month + "." + localDate.getYear());
 			localDate = localDate.plusDays(1);
 		}
 	}
