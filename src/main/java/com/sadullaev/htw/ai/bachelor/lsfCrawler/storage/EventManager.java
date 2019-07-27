@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
@@ -26,13 +26,16 @@ public class EventManager implements EventManagerInterface{
 	 * running and configuring hibernate for transaction
 	 */
 	public void setup() {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-		        .configure() // configures settings from hibernate.cfg.xml
-		        .build();
+		Configuration configuration = new Configuration();
+        ServiceRegistry serviceRegistry
+            = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
+        configuration.addAnnotatedClass(Event.class);
+        
 		try {
-		    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+		    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		} catch (Exception ex) {
-		    StandardServiceRegistryBuilder.destroy(registry);
+		    StandardServiceRegistryBuilder.destroy(serviceRegistry);
 		    System.out.println("Datenbank wurde nicht gefunden.");
 		    System.exit(1);
 		}
