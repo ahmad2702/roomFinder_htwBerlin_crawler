@@ -17,6 +17,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -30,13 +32,13 @@ public class DatabaseTest {
 	private static SessionFactory sessionFactory;
 	private static EventManager eventManager = new EventManager();
 	
-	private static List<TestEvent> eventList = new ArrayList<TestEvent>();
+	private static List<TestEvent> eventList1;
+	private static List<TestEvent> eventList2;
 	
 	private static DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 	
 	@BeforeClass
 	public static void initTest() throws ParseException {
-		
 		Configuration configuration = new Configuration();
         ServiceRegistry serviceRegistry
             = new StandardServiceRegistryBuilder()
@@ -45,8 +47,14 @@ public class DatabaseTest {
 		
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         eventManager.setSessionFactory(sessionFactory);
-        
-        // Test objects        
+	}
+	
+	@Before
+	public void setUp() throws ParseException {
+		eventList1 = new ArrayList<TestEvent>();
+		eventList2 = new ArrayList<TestEvent>();
+		
+		// Test objects        
         String dateString = "01.07.2019 ";
         Date date = new Date(new Timestamp(format.parse(dateString+"00:00").getTime()).getTime());
 		
@@ -61,7 +69,8 @@ public class DatabaseTest {
 		event1.setRoom("624");
 		event1.setLecturer("Prof.Dr.Test1");
 		event1.setIsActual(1);
-		eventList.add(event1);
+		eventList1.add(event1);
+		eventList2.add(event1);
 
 		TestEvent event2 = new TestEvent();
 		event2.setDate(date);
@@ -74,7 +83,8 @@ public class DatabaseTest {
 		event2.setRoom("345");
 		event2.setLecturer("Prof.Dr.Test2");
 		event2.setIsActual(1);
-		eventList.add(event2);
+		eventList1.add(event2);
+		eventList2.add(event2);
 		
 		TestEvent event3 = new TestEvent();
 		event3.setDate(date);
@@ -87,7 +97,8 @@ public class DatabaseTest {
 		event3.setRoom("456");
 		event3.setLecturer("Prof.Dr.Test3");
 		event3.setIsActual(1);
-		eventList.add(event3);
+		eventList1.add(event3);
+		eventList2.add(event3);
 		
 		TestEvent event4 = new TestEvent();
 		event4.setDate(date);
@@ -100,8 +111,25 @@ public class DatabaseTest {
 		event4.setRoom("567");
 		event4.setLecturer("Prof.Dr.Test4");
 		event4.setIsActual(1);
-		eventList.add(event4);
+		eventList1.add(event4);
 		
+		TestEvent event5 = new TestEvent();
+		event5.setDate(date);
+		event5.setBegin(new Timestamp(format.parse(dateString+"17:00").getTime()));
+		event5.setEnd(new Timestamp(format.parse(dateString+"18:30").getTime()));
+		event5.setLsfNr("104");
+		event5.setName("English1");
+		event5.setLsfId(5);
+		event5.setBuilding("Gebäude A");
+		event5.setRoom("123");
+		event5.setLecturer("Prof.Dr.Test5");
+		event5.setIsActual(1);
+		eventList2.add(event5);
+	}
+	
+	@After
+	public void setUpAfter() {
+		clearTestDB();
 	}
 	
 	private void clearTestDB() {
@@ -112,14 +140,10 @@ public class DatabaseTest {
 		session.close();
 	}
 	
-	@Ignore
 	@Test
  	public void addFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
-		//db must free from events for test
-		clearTestDB();
-		
 		// Save test events 
-		eventManager.add(eventList);
+		eventManager.add(eventList1);
 		
 		Session session = sessionFactory.openSession();    
 		
@@ -127,10 +151,7 @@ public class DatabaseTest {
 		String readSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent where date='" + "2019-07-01" + "' and is_actual=1";
 		List<Event> eventsFromDatabase = session.createQuery(readSqlQuery).list();
 		
-		//delete test events from db
-		clearTestDB();
-		
-		assertTrue(eventList.equals(eventsFromDatabase));
+		assertTrue(eventList1.equals(eventsFromDatabase));
 	}
 	
 	
@@ -138,7 +159,7 @@ public class DatabaseTest {
  	public void readFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
 		// Add manual test events
 		Session session = sessionFactory.openSession();  
-		for (TestEvent event: eventList) {
+		for (TestEvent event: eventList1) {
 			session.beginTransaction();
 			session.save(event);
 			session.getTransaction().commit();
@@ -147,8 +168,14 @@ public class DatabaseTest {
 		
 		List<Event> eventsFromDatabase = eventManager.read("01.07.2019", true, "com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent");
 		
-		clearTestDB();
-		assertTrue(eventList.equals(eventsFromDatabase));
+		assertTrue(eventList1.equals(eventsFromDatabase));
+	}
+	
+	@Test
+ 	public void updateFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
+		
+		
+		
 	}
 	
 	
