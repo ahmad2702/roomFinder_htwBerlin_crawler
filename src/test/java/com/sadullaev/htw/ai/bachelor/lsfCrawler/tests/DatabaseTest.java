@@ -1,5 +1,7 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
@@ -10,11 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
@@ -22,7 +26,7 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent;
 
 public class DatabaseTest {
-	
+
 	private static SessionFactory sessionFactory;
 	private static EventManager eventManager = new EventManager();
 	
@@ -100,10 +104,51 @@ public class DatabaseTest {
 		
 	}
 	
+	private void clearTestDB() {
+		Session session = sessionFactory.openSession();    
+		String deleteAllSqlQuery = "delete FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent";
+		session.beginTransaction();
+		session.createQuery(deleteAllSqlQuery).executeUpdate();
+		session.close();
+	}
+	
+	@Ignore
 	@Test
- 	public void saveEventsTest() throws UnsupportedEncodingException, IOException, ParseException {
+ 	public void addFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
+		//db must free from events for test
+		clearTestDB();
+		
+		// Save test events 
 		eventManager.add(eventList);
 		
+		Session session = sessionFactory.openSession();    
+		
+		//read test events from db
+		String readSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent where date='" + "2019-07-01" + "' and is_actual=1";
+		List<Event> eventsFromDatabase = session.createQuery(readSqlQuery).list();
+		
+		//delete test events from db
+		clearTestDB();
+		
+		assertTrue(eventList.equals(eventsFromDatabase));
+	}
+	
+	
+	@Test
+ 	public void readFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
+		// Add manual test events
+		Session session = sessionFactory.openSession();  
+		for (TestEvent event: eventList) {
+			session.beginTransaction();
+			session.save(event);
+			session.getTransaction().commit();
+		}
+		session.close();
+		
+		List<Event> eventsFromDatabase = eventManager.read("01.07.2019", true, "com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent");
+		
+		clearTestDB();
+		assertTrue(eventList.equals(eventsFromDatabase));
 	}
 	
 	

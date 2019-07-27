@@ -111,9 +111,11 @@ public class EventManager implements EventManagerInterface{
 	 * @param isActual: actual or canceled events
 	 */
 	public void updateLastEvents(List<String> date, boolean isActual) throws ParseException {
+		String entityClass =  "com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event";
+		
 		
 		for(int i = 0; i < date.size(); i++) {
-			List<Event> oldList = read(date.get(i), isActual);
+			List<Event> oldList = read(date.get(i), isActual, entityClass);
 	        List<Event> newList = parseAndGetEvents(date.get(i), isActual);
 	        
 	        List<Event> duplikate = DuplicateUtil.getDuplikate(newList, oldList);
@@ -143,16 +145,16 @@ public class EventManager implements EventManagerInterface{
 	 * @param isActual: actual or canceled events
 	 * @return events from database
 	 */
-	private List<Event> read(String day, boolean isActual) {
+	public List<Event> read(String day, boolean isActual, String entityClass) {
 		String dayFormatted = DateUtil.getDateFormatForSql(day);
 
 		Session session = sessionFactory.openSession();    
 		
 		String oldSqlQuery = "";
 		if(isActual) {
-			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='" + dayFormatted + "' and is_actual=1";
+			oldSqlQuery = "FROM "+entityClass+" where date='" + dayFormatted + "' and is_actual=1";
 		} else {
-			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='" + dayFormatted + "' and is_actual=0";
+			oldSqlQuery = "FROM "+entityClass+" where date='" + dayFormatted + "' and is_actual=0";
 		}
         
         List<Event> eventsFromDatabase = session.createQuery(oldSqlQuery).list();
