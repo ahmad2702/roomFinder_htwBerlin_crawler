@@ -169,15 +169,14 @@ public class EventManager implements EventManagerInterface{
 	 * Update existing events into database
 	 * @param events as list
 	 */
-	private void update(List<Event> events) {      
+	public void update(List<?> events) {      
         if(events.size() != 0) {
         	
         	Session session = sessionFactory.openSession();
 	        System.out.println("Updating...");
 	        
-	        for(Event event : events) {
+	        for(Object event : events) {
 	        	session.beginTransaction();
-	        	System.out.println("-> Id: " + event.getId());
 	        	session.update(event);
 	        	session.getTransaction().commit();
 	        }
