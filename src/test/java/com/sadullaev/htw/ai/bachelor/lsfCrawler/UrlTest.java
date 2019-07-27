@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtil;
 
 public class UrlTest {
 	
@@ -13,7 +13,7 @@ public class UrlTest {
 		int id = 150148;
 		String url = "https://lsf.htw-berlin.de/qisserver/rds?state=wsearchv&search=2&P_VormerkenAusschalten=y&veranstaltung.veranstid="+id+"&xmlheader=&menuid=editlectures";
 		
-		int rusult = UrlUtils.getEventIdFromLink(url);
+		int rusult = UrlUtil.getEventIdFromLink(url);
 		assertTrue(rusult==id);
 	}
 	

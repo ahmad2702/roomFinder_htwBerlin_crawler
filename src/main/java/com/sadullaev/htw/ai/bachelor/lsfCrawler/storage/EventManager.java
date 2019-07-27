@@ -11,8 +11,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.HibernateUtil;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtil;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DuplicateUtil;
 
 public class EventManager implements EventManagerInterface{
 	
@@ -113,7 +113,7 @@ public class EventManager implements EventManagerInterface{
 			List<Event> oldList = read(date.get(i), isActual);
 	        List<Event> newList = parseAndGetEvents(date.get(i), isActual);
 	        
-	        List<Event> duplikate = HibernateUtil.getDuplikate(newList, oldList);
+	        List<Event> duplikate = DuplicateUtil.getDuplikate(newList, oldList);
 		    
 		    if(duplikate.size()!=0) {
 		    	newList.removeAll(duplikate);
@@ -141,7 +141,7 @@ public class EventManager implements EventManagerInterface{
 	 * @return events from database
 	 */
 	private List<Event> read(String day, boolean isActual) {
-		String dayFormatted = DateUtils.getDateFormatForSql(day);
+		String dayFormatted = DateUtil.getDateFormatForSql(day);
 
 		Session session = sessionFactory.openSession();    
 		

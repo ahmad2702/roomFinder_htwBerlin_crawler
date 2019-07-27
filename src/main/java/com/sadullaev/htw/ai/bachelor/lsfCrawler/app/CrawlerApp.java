@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfConfiguration;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtil;
 
 public class CrawlerApp 
 {
@@ -30,12 +30,12 @@ public class CrawlerApp
         // selecting operation
         if(LsfConfiguration.getOption()==1) {
         	// load all events
-        	List<String> allDate = DateUtils.getDatesBetweenTwoDates(LsfConfiguration.getStartDate(), LsfConfiguration.getEndDate());
+        	List<String> allDate = DateUtil.getDatesBetweenTwoDates(LsfConfiguration.getStartDate(), LsfConfiguration.getEndDate());
         	eventManager.pullAllEvents(allDate);
         	
         }else if(LsfConfiguration.getOption()==2) {
         	// update existing events
-        	List<String> allDate = DateUtils.getDatesBetweenNowAndDate(LsfConfiguration.getEndDate());
+        	List<String> allDate = DateUtil.getDatesBetweenNowAndDate(LsfConfiguration.getEndDate());
         	eventManager.updateLastEvents(allDate, true);
         	
         }

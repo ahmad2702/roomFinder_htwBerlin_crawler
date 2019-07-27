@@ -1,0 +1,856 @@
+/*
+$Id: LSFServlet_Sommer.css,v 2.6 2004/07/20 09:48:19 brummermann Exp $
+$Log: LSFServlet_Sommer.css,v $
+Revision 2.6  2004/07/20 09:48:19  brummermann
+Schriftart im Body setzen
+
+Revision 2.5  2004/07/12 11:33:32  bolte
+Gruene Warnung ist jetzt dunkler
+
+Revision 2.4  2004/07/06 12:14:46  bolte
+StyleSheet menu2 mit Platz rechts und links
+
+Revision 2.3  2004/07/05 09:21:57  bolte
+Neues StyleSheet kleinPlatz mit 10 px Seitenabstand
+
+Revision 2.2  2004/06/29 08:06:18  baum
+Ersatz für <nobr> = .nobr { white-space:nowrap; } eingefügt und somit W3C-konform
+
+*/
+
+/* Ersatz für <nobr> und damit W3C-konform */
+
+@import "QISDesign_fhtw.css";
+
+body {
+    background-color: #0082D1; 
+    margin: 0px;
+    padding: 0px;
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.bggreentwo { 
+    background-color: #0082D1; 
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.bggreen { 
+    background-color: #0082D1; 
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.bgblue { 
+    background-color: #76B900; 
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.inside{ 
+    background-color: #FFFFFF; 
+}
+
+.bggrau{ 
+    background-color: #E1DDD1; 
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.bgbrown{ 
+    background-color: #E6E3DB; 
+    font-size: 11px;
+    padding-left: 5px;
+    color: #666666; 
+}
+
+.bgbrownblack{ 
+    background-color: #E6E3DB; 
+    font-size: 11px;
+    padding-left: 5px;
+}
+
+.bggrey{ 
+    font-weight:normal;
+    background-color: #E6E3DB; 
+    font-size: 11px;
+    padding-left: 6px;
+    padding-top: 3px;
+    border-top: 1px solid #CCCCCC;
+    color: #666666; 
+    vertical-align:top;
+}
+
+.bordertop{ 
+    border-top: 1px solid #CCCCCC;
+}
+
+.bgwhiteper{ 
+    font-size: 11px;
+    padding-left: 6px;
+    border-top: 1px solid #CCCCCC;
+    color: #666666; 
+    font-weight:normal;
+}
+
+.bgwhitebel{ 
+    font-size: 11px;
+    padding-left: 6px;
+    border-top: 1px solid #CCCCCC;
+    font-weight:normal;
+}
+
+
+.bgwhite{ 
+    background-color: #FFFFFF; 
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.bglogin{ 
+    background-color: #E6E3DB; 
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.ChangeReadOnlyInput
+{background-color:#FFFFE2;border-color:#90A0A8;border-style:solid;border-width:1px 0px 0px 1px;font-size:110%;font-weight:normal;min-height:1em;min-width:1em;padding:1px 2px 3px;}
+
+.hd_darkgreen{ 
+    color: #5E880A; 
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.hd_darkgreensmall{ 
+    color: #5E880A; 
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.hd_darkgreenhead{ 
+    color: #5E880A; 
+    font-weight: bold;
+    font-size: 14px;
+    font-family: Courier New;
+}
+
+.hd_login{ 
+    color: #666666; 
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.hd_darkred{ 
+    color: #C04000; 
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.verinfo{ 
+    color: #666666; 
+    font-weight:normal;
+}
+
+
+.vorlesungsfreiWochen {
+    background-color:#E0E0E0;
+    font-size: 9px;
+}
+
+.nobr { white-space:nowrap; }
+
+
+/*****************************************************************************/
+/*                            Konfliktplan                                   */
+/*****************************************************************************/
+td.woch, td.Einzel, td.Block, td.BlockSa, td.BlockSaSo, td.twoWeek, td.conflict, td.plan_default, td.no_color, td.trenn_row{
+  width:1em;   
+}
+/*
+tr.conflictplan_row{
+  background-color:transparent;
+  margin:0;
+  padding:0;
+}
+tr.conflictplan_row:hover{
+  background-color:#C0C0C0;  
+}
+*/
+.trenn_row{
+  background-color: #808080;
+}
+.woch{
+  background-color: #304A6D;
+  text-align:center;
+}
+.Einzel{
+  background-color:#B74912;
+  text-align:center;
+}
+.Block, .BlockSa, .BlockSaSo{
+  background-color:#B74912;
+  text-align:center;
+}
+.twoWeek{
+  background-color:#E8BFB0;
+  text-align:center;
+}
+.conflict{
+  background-color: #ff0000;
+  color:#fff;
+  text-align:center;
+}
+.plan_default{
+  background-color: #dbdde9;
+  text-align:center;
+}
+.no_color{
+  /*border: 1px solid #C0C0C0;*/
+  background-color: #E0E0E0;
+  text-align:center;
+}
+a.conflictplan{
+  width:100%;
+  height:100%;
+}
+
+
+a:link { font-weight:normal;  color:#0083CC; font-size: 11px; text-decoration:none }
+a:visited { font-weight:normal; color:#976DA5; font-size: 11px; text-decoration:none }
+a:hover { font-weight:normal; color:#0370AD; font-size: 11px; text-decoration:none}
+a:active { font-weight:normal; color:#000000; font-size: 11px; text-decoration:none}
+a:focus { font-weight:normal; color:#000000; font-size: 11px; text-decoration:none}
+
+a.mhead:link { font-size: 11px; font-weight:normal; color:#FFFFFF; text-decoration:none}
+a.mhead:visited { font-size: 11px; font-weight:normal; color:#FFFFFF; text-decoration:none}
+a.mhead:hover { font-size: 11px; font-weight:normal; color:#000000; text-decoration:none}
+a.mhead:active { font-size: 11px; font-weight:normal; color:#000000; text-decoration:none}
+a.mhead:focus { font-size: 11px; font-weight:normal; color:#000000; text-decoration:none}
+
+a.ongrey:link { font-size: 11px; font-weight:bold; color:#0083CC; text-decoration:none}
+a.ongrey:visited { font-size: 11px; font-weight:bold; color:#976DA5; text-decoration:none}
+a.ongrey:hover { font-size: 11px; font-weight:bold; color:#0370AD; text-decoration:none}
+a.ongrey:active { font-size: 11px; font-weight:bold; color:#0083CC; text-decoration:none}
+a.ongrey:focus { font-size: 11px; font-weight:bold; color:#0083CC; text-decoration:none}
+
+a.nav:link { font-size: 10px;  color:#0083CC; text-decoration:none}
+a.nav:visited { font-size: 10px;  color:#976DA5; text-decoration:none}
+a.nav:hover { font-size: 10px;  color:#0370AD; text-decoration:none}
+a.nav:active { font-size: 10px;  color:#0083CC; text-decoration:none}
+a.nav:focus { font-size: 10px;  color:#0083CC; text-decoration:none}
+
+a.ueb:link {  color:#0083CC; font-size: 11px; text-decoration:none}
+a.ueb:visited {  color:#976DA5; font-size: 11px; text-decoration:none}
+a.ueb:hover {  color:#0370AD; font-size: 11px; text-decoration:none}
+a.ueb:active {  color:#0083CC; font-size: 11px; text-decoration:none}
+a.ueb:focus {  color:#0083CC; font-size: 11px; text-decoration:none}
+
+a.ver:link { font-weight:bold; font-size: 12px; text-decoration:none}
+a.ver:visited { font-weight:bold; font-size: 12px; text-decoration:none}
+a.ver:hover { font-weight:bold; font-size: 12px; text-decoration:none}
+a.ver:active { font-weight:bold; font-size: 12px; text-decoration:none}
+a.ver:focus { font-weight:bold; font-size: 12px; text-decoration:none}
+
+a.disabled:link { color:#A0A0A0; text-decoration:none}
+a.disabled:visited { color:#A0A0A0; text-decoration:none}
+a.disabled:hover { color:#A0A0A0; text-decoration:none}
+a.disabled:active { color:#A0A0A0; text-decoration:none}
+a.disabled:focus { color:#A0A0A0; text-decoration:none}
+
+a.black:link { color:#000000; text-decoration:none}
+a.black:visited { color:#000000; text-decoration:none}
+a.black:hover { color:#000000; text-decoration:none}
+a.black:active { color:#000000; text-decoration:none}
+a.black:focus { color:#000000; text-decoration:none}
+
+a.label:link  { font-weight:normal; text-decoration:none}
+a.label:visited { font-weight:normal; text-decoration:none }
+a.label:hover { font-weight:normal; text-decoration:none}
+a.label:active { font-weight:normal; text-decoration:none}
+a.label:focus  { font-weight:normal; text-decoration:none}
+
+a.Konto:link { font-weight:500; text-decoration:none}
+a.Konto:visited { font-weight:500; text-decoration:none}
+a.Konto:hover  { font-weight:500; text-decoration:none}
+a.Konto:active { font-weight:500; text-decoration:none}
+a.Konto:focus  { font-weight:500; text-decoration:none}
+
+a.labelslim:link  { font-weight:500; text-decoration:none}
+a.labelslim:visited { font-weight:500; text-decoration:none}
+a.labelslim:hover  { font-weight:500; text-decoration:none}
+a.labelslim:active { font-weight:500; text-decoration:none}
+a.labelslim:focus  { font-weight:500; text-decoration:none}
+
+a.tablabel:link { font-weight:600; text-decoration:none}
+a.tablabel:visited { font-weight:600;text-decoration:none}
+a.tablabel:active { font-weight:600; text-decoration:none}
+a.tablabel:focus  { font-weight:600; text-decoration:none}
+a.tablabel:hover  { font-weight:600; text-decoration:none}
+
+.Abschnitt{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.Konto{
+    font-size: 11px;
+}
+
+.Kontointab{
+    color: #000000; 
+    font-weight: bold;
+    background-color: #E2EDC3;
+    padding: 3px;
+    font-size: 12px;
+    border-right: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.posrecords{
+    font-size: 11px;
+    border-right: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+img
+{
+    border: 0px;
+    padding: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+ul.treelist, ul.treelist ul {
+margin: 0;
+padding-left: 20px;
+}
+ul.treelist li {
+list-style-type: none;
+margin-top:0.2em;
+}
+
+ul.LinieLinks {border-left: 1px dotted #00F;}
+
+.unsichtbar {
+position: absolute;
+left: -3000px;
+}
+
+.td_SelectedRow
+{
+    font-size: 14px;
+}
+.th
+{
+    font-size: 14px;
+}
+
+.td_p 
+{
+    /*background-color: #DCD0B8;*/
+    padding-top: 8px;
+    font-size: 11px;
+}
+
+.background {
+margin: 0px;
+padding: 0px;
+}
+
+.maske {
+/*background-color: #DCD0B8;*/
+font-size: 11px;
+}
+
+.ueberschrift {
+font-size: 28px;
+font-weight: 1600;
+}
+
+.sehrgross {
+color: #005087;
+font-size: 24px;
+font-weight: 600;
+}
+
+.gross {
+font-size: 12px;
+font-weight: 600;
+}
+
+.grosserwsgr {
+color: #FFFFFF;
+background-color: #76B900;
+font-size: 14px;
+font-weight: bold;
+}
+
+.grosswsgr {
+color: #FFFFFF;
+background-color: #76B900;
+font-size: 11px;
+font-weight: bold;
+}
+
+.etwasgross{font-size: 16px; font-weight: 600;}
+.normalFett{font-size: 14px; font-weight: 600;}
+
+
+.normal {
+font-size: 11px;
+}
+
+.sehrkleiner {
+font-size: 9px;
+}
+
+.sehrklein {
+font-size: 10px;
+}
+
+.klein {
+font-size: 11px;
+font-weight: normal;
+}
+
+.kleinPlatz{
+    font-size: 11px;
+    font-weight: 500;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.kleinFett
+{
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.notiz {
+    color: #666666;
+    font-size: 11px;
+    font-weight: 100;
+}
+
+.spacer {
+font-size: 4px;
+}
+
+.login {
+font-size: 11px;
+color: #DD2222;
+background-color: #FFFFFF;
+font-weight: 800;
+}
+
+.orgborder {
+border: 1px solid #76B900;
+}
+
+.hd_news {
+    color: #76B900;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 0.3em;
+}
+
+.hd_cal {
+    background-color: #FF5F00;
+    color: #FFFFFF;
+    font-size: 11px;
+}
+
+.preloginnews {
+    font-size: 11px;
+}
+
+.veransthints {
+    font-size: 11px;
+    color: #FF5F00;
+    padding-top: 3px;
+    padding-left: 8px;
+    padding-bottom: 3px;
+    padding-right: 3px;
+}
+
+.veransttext {
+    font-size: 11px;
+    color: #000000;
+    padding-top: 3px;
+    padding-left: 8px;
+    padding-bottom: 3px;
+    padding-right: 3px;
+}
+
+.color_organe {
+    color: #FF5F00;
+}
+
+.verysmall {
+    font-size: 6pt;
+}
+
+.ssmall {
+    font-size: 8pt;
+}
+
+.languagegray {
+    background-color: #FFFFFF;
+    color: #5E880A;
+    font-size: 9pt;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.headline /* normaler Menu Hintergrund */ 
+{
+    color:#76B900;
+    font-size: 16pt;
+    font-weight: normal;
+    padding-left: 30px;
+    padding-right: 6px;
+}
+
+.mhead /* normaler Menu Hintergrund */ 
+{
+background-color: #76B900;
+color: #FFFFFF;
+font-size: 11px;
+font-weight: normal;
+padding-left: 6px;
+padding-right: 6px;
+}
+.menu1_off /* normaler Menu Hintergrund */ 
+{
+background-color: #0082D1;
+color: #F0F8FF;
+font-size: 14px;
+padding-left: 14px;
+padding-right: 14px;
+}
+.menu1_off a:link { font-size: 11px; font-weight: bold; color:#FFFFFF; text-decoration:none}
+.menu1_off a:visited { font-size: 11px; font-weight: bold; color:#FFFFFF; text-decoration:none}
+.menu1_off a:hover { font-size: 11px; font-weight: bold; color:#FFFFFF; text-decoration:none}
+.menu1_off a:active { font-size: 11px; font-weight: bold; color:#FFFFFF; text-decoration:none}
+.menu1_off a:focus { font-size: 11px; font-weight: bold; color:#FFFFFF; text-decoration:none}
+
+.menu1_on { /* kleiner Beitext*/
+background-color: #FFFFFF;
+font-color: #0083CC;
+color: #0083CC;
+font-size: 14px;
+padding-left: 14px;
+padding-right: 14px;
+}
+
+.menu1_on a:link { font-size: 11px; font-weight: bold; color:#0083CC; text-decoration:none}
+.menu1_on a:visited { font-size: 11px; font-weight: bold; color:#976DA5; text-decoration:none}
+.menu1_on a:hover { font-size: 11px; font-weight: bold; color:#0370AD; text-decoration:none}
+.menu1_on a:active { font-size: 11px; font-weight: bold; color:#0083CC; text-decoration:none}
+.menu1_on a:focus { font-size: 11px; font-weight: bold; color:#0083CC; text-decoration:none}
+
+.menu2_off {
+color: #000000;
+font-size: 10px;
+padding-left: 6px;
+padding-right: 6px;
+}
+
+.menu2_on {
+color: #FFFFFF;
+font-size: 10px;
+padding-left: 6px;
+padding-right: 6px;
+}
+
+.menu3_off /* normaler Menu Hintergrund */ 
+{
+background-color: #0082D1;
+font-color: #FFFFFF;
+color: #FFFFFF;
+font-size: 11px;
+}
+.menu3_off a:link { font-size: 11px; color:#FFFFFF; text-decoration:none}
+.menu3_off a:visited { font-size: 11px; color:#FFFFFF; text-decoration:none}
+.menu3_off a:hover { font-size: 11px; color:#FFFFFF; text-decoration:none}
+.menu3_off a:active { font-size: 11px; color:#FFFFFF; text-decoration:none}
+.menu3_off a:focus { font-size: 11px; color:#FFFFFF; text-decoration:none}
+
+.menu3_on { /* kleiner Beitext*/
+background-color: #BBDD7C;
+font-color: #000000;
+color: #000000;
+font-size: 11px;
+}
+.menu3_on a:link { font-size: 11px; color:#000000; text-decoration:none}
+.menu3_on a:visited { font-size: 11px; color:#000000; text-decoration:none}
+.menu3_on a:hover { font-size: 11px; color:#000000; text-decoration:none}
+.menu3_on a:active { font-size: 11px; color:#000000; text-decoration:none}
+.menu3_on a:focus { font-size: 11px; color:#000000; text-decoration:none}
+
+.title {
+background-color: #005087;
+color: #FFFFFF;
+font-size: 11px;
+font-weight: 600;
+}
+
+.button {
+background-color: #D0D0D0;
+color: #000000;
+font-size: 11px;
+font-weight: 600;
+}
+
+.table_wheat {
+vertical-align:top;
+}
+
+.table_lightblue {
+vertical-align:top;
+background-color:lightblue;
+}
+
+hr {
+color: #CCCCCC;
+height: 0px;
+border-bottom: 1px solid #CCCCCC;
+padding: 0;
+margin-top: 0px;
+margin-bottom: 0px;
+}
+
+.plan3{
+background-color:#BBEEFF;
+font-size: 11px;
+font-weight: 500;
+}
+.plan4{
+background-color:#FE9F3A;
+font-size: 11px;
+font-weight: 500;
+}
+/* Einzeltermine FFFFBB*/
+.plan5{
+background-image:url("/qisserver/pub/img/bg-pattern_blockveranst.gif");
+font-size: 11px;
+font-weight: 500;
+}
+/* 14-tägliche Termine */
+.plan6{
+background-image:url("/qisserver/pub/img/bg-pattern_14-taegl-veranst.gif");
+font-size: 11px;
+font-weight: 500;
+}
+
+
+/* Raumanfragen */
+.plan11{
+background-image:url("/qisserver/pub/img/bg-pattern_anfrage.gif");
+font-size: 11px;
+font-weight: 500;
+}
+/* Raumanfragen */
+.plan12{
+    border: 1pt solid #CCCCCC;
+    background-image:url("/qisserver/pub/img/bg-pattern_anfrage.gif");
+    font-size: 11px;
+    font-weight: 500;
+
+}
+
+
+.plan_rahmenhead {
+background-color: #E2EDC3;
+font-size: 14px;
+padding-left: 5px;
+padding-right: 5px;
+
+}
+
+.plan_rahmen {
+    font-size: 10px;
+}
+
+.plan1 {
+    font-size: 4px;
+}
+.plan2 {
+    border: 1pt solid #CCCCCC;
+    background-color:#FFFFFF;
+    padding: 0px;
+}
+
+.form {
+margin-top: -1px;
+}
+
+.kleinerButton {
+height: 18px;
+font-size: 9px;
+}
+
+.warnung{
+color: #FF0000;
+font-weight: 600;
+font-size: 11px;
+}
+.grueneWarnung{
+color: #76B900;
+font-weight: 600;
+font-size: 12px;
+}
+
+.blauWarnung{
+color: #0083CC;
+font-weight: 600;
+font-size: 11px;
+}
+
+.input1 {
+width:550px;
+}
+
+.globalmessage {
+    color: #FFFFFF;
+    text-align: center;
+    background-color: #DB6B4D;
+    font-size: 14px;
+    font-weight:bold
+}
+
+.input,.inputchanged,.inputerror,.inputselected,.noinput,.inputmandatory,.inputchoice,.inputhighlighted{
+}
+
+.inputchanged{color: #00009F;}
+.inputerror{color: #BF0000;}
+
+.inputhighlighted{
+background-color: #FFFF50;
+color: #000000;
+}
+.inputmandatory{
+background-color: #FFFFEE;
+}
+.inputchoice{
+background-color: #EEFFFF;
+}
+.inputselected{
+background-color: #000080;
+color: #FFFFFF;
+}
+span.inputselected, span.noinput {
+margin: 1px;
+display: block;
+border:1px solid #A0A0A0;
+border:1px solid #FFFFFF;
+padding: 0.1em 1em 0.1em 1em;
+}
+.noinput {
+color: #000000;
+}
+
+.currenttab{
+font-size: 11px;
+font-color: #FFFFFF;
+}
+
+.header{
+border: 0.5pt;
+color: #00009F;
+background-color: #FFFFCC;
+font-size: 14px;
+font-weight: bold;
+}
+
+table.hiscalendar {
+font-size: 14px;
+}
+a.hiscalendar:link { font-weight:bold; color:#FF0000; text-decoration:none}
+a.hiscalendar:visited { font-weight:bold; color:#FF0000; text-decoration:none}
+a.hiscalendar:hover  { font-weight:bold; color:#FF0000; text-decoration:none}
+a.hiscalendar:active { font-weight:bold; color:#FF0000; text-decoration:none}
+a.hiscalendar:focus  { font-weight:bold; color:#FF0000; text-decoration:none}
+table.hiscalendar th {
+font-weight: normal;
+}
+table.hiscalendar .feiertag {
+color: #2299BB;
+font-weight: bold;
+}
+table.hiscalendar td.termWeekDay {
+background-color: #FFFFCC;
+}
+table.hiscalendar td.termWeekendDay {
+background-color: #FFFF99;
+}
+table.hiscalendar td.month {
+text-align: center;
+}
+table.hiscalendar td.day {
+background-color: #dbdde9;
+}
+table.hiscalendar td.weekend {
+   background-color: #bdc0d7;
+}
+table.hiscalendar td.today {
+font-weight: bold;
+text-color: #FF0000;
+}
+table.hiscalendar td.todayweekend {
+font-weight: bold;
+text-color: #FF0000;
+background-color: #bdc0d7;
+}
+
+
+.calendar {			
+	text-decoration: none;
+	color: #777;
+	background: #fff;	
+	padding: 5px;
+	border: 1px solid #000;		
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+.calendarHeading {
+	background: #ddd;
+	color: black;
+}
+.weekendDay {
+	background: #ddd;
+}
+.freeDay { 
+	color: blue;
+	text-decoration: none;
+}
+a.linkdecoweg {
+	text-decoration: none;
+	color: #777;
+}
+.markedday { 
+	border: 1px solid #000;	
+	font-weight: bold;
+}
+.inputposition {
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 10px; 
+}
+.cellborders {
+}
+tr.cat {
+	background-color: #FFDF66;
+}
+tr.mouse {
+	background-color: #66FFFF;
+}
+
+@media print {
+  .noprint { display:none; }
+}

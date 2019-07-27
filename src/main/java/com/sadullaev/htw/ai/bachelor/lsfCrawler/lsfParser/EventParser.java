@@ -15,7 +15,7 @@ import org.jsoup.select.Elements;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.propertiesLoader.LsfConfiguration;
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtils;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtil;
 
 public class EventParser {
 	
@@ -77,6 +77,13 @@ public class EventParser {
 		tableSelector = LsfConfiguration.getTableSelector();
 		
 	}
+	
+	/**
+	 * Default Constructor
+	 */
+	public EventParser() {
+		
+	}
 
 	/**
 	 * @return url of page
@@ -133,7 +140,7 @@ public class EventParser {
         	currentEvent.setName(events.get(3).text().replaceAll("\u0092", "").replaceAll("\u0096", ""));
         	
         	String eventLink = events.get(3).select("a").first().attr("abs:href");
-        	int eventId = UrlUtils.getEventIdFromLink(eventLink);
+        	int eventId = UrlUtil.getEventIdFromLink(eventLink);
         	
 	        currentEvent.setLsfId(eventId);
 	        if(isActual) {
@@ -151,11 +158,35 @@ public class EventParser {
 		return eventList;
 	}
 
+	
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public Elements getTable() {
+		return table;
+	}
+
+	public void setTable(Elements table) {
+		this.table = table;
+	}
+
 	/**
 	 * @return table with events
 	 */
 	public Elements getDoc() {
 		return table;
+	}
+	
+	
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	/**

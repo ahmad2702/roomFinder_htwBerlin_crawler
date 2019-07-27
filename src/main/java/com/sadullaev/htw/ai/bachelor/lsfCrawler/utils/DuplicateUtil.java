@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
  
-public class HibernateUtil {
+public class DuplicateUtil {
 	
 	public static List<Event> getDuplikate(List<Event> newEv, List<Event> oldEv) {
 		

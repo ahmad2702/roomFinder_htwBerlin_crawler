@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class DateUtils {
+public class DateUtil {
 	
 	final static DateTimeFormatter dateTimeFormatterLsf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 	final static DateTimeFormatter dateTimeFormatterSql = DateTimeFormatter.ofPattern("yyyy-MM-dd");

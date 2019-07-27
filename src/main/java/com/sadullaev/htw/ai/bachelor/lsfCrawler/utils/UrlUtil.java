@@ -1,6 +1,6 @@
 package com.sadullaev.htw.ai.bachelor.lsfCrawler.utils;
 
-public class UrlUtils {
+public class UrlUtil {
 	
 	public static int getEventIdFromLink(String url) {
 		

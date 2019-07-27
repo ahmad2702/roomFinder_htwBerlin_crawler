@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtils;
+import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtil;
 
 public class DateUtilsTest {
 	
@@ -45,20 +45,20 @@ public class DateUtilsTest {
 	
 	@Test
  	public void testDateListForFullPull() {
-		List<String> result = DateUtils.getDatesBetweenTwoDates(START_DATE, END_DATE);
+		List<String> result = DateUtil.getDatesBetweenTwoDates(START_DATE, END_DATE);
  		assertTrue(result.equals(dateListForFullPull));
  	}
 	
 	@Test
  	public void testDateListForUpdate() {
-		List<String> result = DateUtils.getDatesBetweenNowAndDate(dateListForUpdate.get(dateListForUpdate.size()-1));
+		List<String> result = DateUtil.getDatesBetweenNowAndDate(dateListForUpdate.get(dateListForUpdate.size()-1));
  		assertTrue(result.equals(dateListForUpdate));
 		
  	}
 	
 	@Test
  	public void testFormatConvertFromLsfToSql() {
-		String result = DateUtils.getDateFormatForSql(LSF_DATE_FORMAT);
+		String result = DateUtil.getDateFormatForSql(LSF_DATE_FORMAT);
  		assertTrue(result.equals(SQL_DATE_FORMAT));
  	}
 	
