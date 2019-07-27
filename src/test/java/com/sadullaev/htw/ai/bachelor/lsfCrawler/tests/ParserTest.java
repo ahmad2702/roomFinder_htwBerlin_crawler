@@ -135,11 +135,7 @@ public class ParserTest {
 	
 	@Test
  	public void eventListTest() throws ParseException {
-		List<Event> eventListFromHtml = eventParser.getEvents();
-		System.out.println(eventListFromHtml);
-		//System.out.println(eventList);
-		
-		
+		List<Event> eventListFromHtml = eventParser.getEvents();		
 		assertTrue(eventListFromHtml.equals(eventList));
 	}
 	

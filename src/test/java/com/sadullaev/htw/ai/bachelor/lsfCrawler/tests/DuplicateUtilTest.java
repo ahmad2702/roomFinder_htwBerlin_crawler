@@ -8,14 +8,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
-import com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DuplicateUtil;
 
 public class DuplicateUtilTest {
@@ -101,6 +100,7 @@ public class DuplicateUtilTest {
 	@Test
  	public void duplicatePositiveTest() {
 		List<Event> duplicates = DuplicateUtil.getDuplikate(list2, list1);
+		duplicates.sort(Comparator.comparing(Event::getLsfId));
 		assertTrue(duplicates.equals(duplicateList));
 	}
 	
