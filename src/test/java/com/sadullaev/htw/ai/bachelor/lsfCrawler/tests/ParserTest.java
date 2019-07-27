@@ -133,7 +133,6 @@ public class ParserTest {
 		assertTrue(eventList.size()==5);
 	}
 	
-	//@Ignore
 	@Test
  	public void eventListTest() throws ParseException {
 		List<Event> eventListFromHtml = eventParser.getEvents();

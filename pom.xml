@@ -68,8 +68,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                    <inputEncoding>UTF-8</inputEncoding>
-        			<outputEncoding>UTF-8</outputEncoding>
                 </configuration>
             </plugin>
 			
