@@ -45,7 +45,7 @@ public class ParserTest {
 	@Test
  	public void sizeTest() throws ParseException {
 		List<Event> eventList = eventParser.getEvents();
-		assertTrue(eventList.size()==9);
+		assertTrue(eventList.size()==5);
 	}
 	
 	@Test
