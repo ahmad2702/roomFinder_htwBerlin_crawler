@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
@@ -85,12 +86,14 @@ public class DuplicateUtilTest {
 		duplicateList.add(event2);
 	}
 	
+	@Ignore
 	@Test
  	public void duplicatePositiveTest() {
 		List<Event> duplicates = DuplicateUtil.getDuplikate(list2, list1);
 		assertTrue(duplicates.equals(duplicateList));
 	}
 	
+	@Ignore
 	@Test
  	public void duplicateNegativeTest() {
 		List<Event> duplicates = DuplicateUtil.getDuplikate(list3, list1);
