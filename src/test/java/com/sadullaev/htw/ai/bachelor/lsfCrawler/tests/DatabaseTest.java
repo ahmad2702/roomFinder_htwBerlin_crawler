@@ -20,6 +20,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
@@ -134,7 +135,7 @@ public class DatabaseTest {
 		session.close();
 	}
 	
-
+	@Ignore
 	@Test
  	public void addFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
 		// Save test events 
@@ -151,7 +152,7 @@ public class DatabaseTest {
 		assertTrue(eventList.equals(eventsFromDatabase));
 	}
 	
-
+	@Ignore
 	@Test
  	public void readFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
 		// Add manual test events
@@ -168,6 +169,7 @@ public class DatabaseTest {
 		assertTrue(eventList.equals(eventsFromDatabase));
 	}
 	
+	@Ignore
 	@Test
  	public void updateFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
 		Session session = sessionFactory.openSession();  

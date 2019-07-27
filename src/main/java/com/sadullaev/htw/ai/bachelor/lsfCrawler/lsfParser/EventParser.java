@@ -137,7 +137,7 @@ public class EventParser {
         	currentEvent.setBegin(startDate);
         	currentEvent.setEnd(endDate);
         	currentEvent.setLsfNr(events.get(2).text());
-        	currentEvent.setName(events.get(3).text().replaceAll("\u0092", "").replaceAll("\u0096", ""));
+        	currentEvent.setName(events.get(3).text().trim().replaceAll("\u0092", "").replaceAll("\u0096", ""));
         	
         	String eventLink = events.get(3).select("a").first().attr("abs:href");
         	int eventId = UrlUtil.getEventIdFromLink(eventLink);
@@ -146,7 +146,7 @@ public class EventParser {
 	        if(isActual) {
 	        	currentEvent.setBuilding(events.get(4).text());
 		        currentEvent.setRoom(events.get(5).text());
-		        currentEvent.setLecturer(events.get(7).text());
+		        currentEvent.setLecturer(events.get(7).text().trim());
 		        currentEvent.setIsActual(1);
 	        }else {
 	        	currentEvent.setLecturer(events.get(5).text());
@@ -195,6 +195,15 @@ public class EventParser {
 	public int getSize() {
 		return size;
 	}
+
+	public boolean isActual() {
+		return isActual;
+	}
+
+	public void setActual(boolean isActual) {
+		this.isActual = isActual;
+	}
+	
 	
 	
 	
