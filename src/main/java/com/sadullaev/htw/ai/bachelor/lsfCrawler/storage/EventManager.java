@@ -87,7 +87,7 @@ public class EventManager implements EventManagerInterface{
 	 * Saving events to database
 	 * @param events as list
 	 */
-	private void add(List<Event> events) {
+	public void add(List<Event> events) {
         if(events.size() != 0) {
         	
         	Session session = sessionFactory.openSession();
@@ -184,8 +184,19 @@ public class EventManager implements EventManagerInterface{
 	        System.out.println("Finished.");
         }
     }	
-
 	
+	
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+
 	/**
 	 * stopping hibernate
 	 */

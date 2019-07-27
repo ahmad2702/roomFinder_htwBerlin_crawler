@@ -1,4 +1,4 @@
-package com.sadullaev.htw.ai.bachelor.lsfCrawler;
+package com.sadullaev.htw.ai.bachelor.lsfCrawler.tests;
 
 import static org.junit.Assert.assertTrue;
 
