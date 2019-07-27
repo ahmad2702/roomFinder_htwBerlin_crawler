@@ -133,12 +133,12 @@ public class ParserTest {
 		assertTrue(eventList.size()==5);
 	}
 	
-	@Ignore
+	//@Ignore
 	@Test
  	public void eventListTest() throws ParseException {
 		List<Event> eventListFromHtml = eventParser.getEvents();
 		System.out.println(eventListFromHtml);
-		System.out.println(eventList);
+		//System.out.println(eventList);
 		
 		
 		assertTrue(eventListFromHtml.equals(eventList));
