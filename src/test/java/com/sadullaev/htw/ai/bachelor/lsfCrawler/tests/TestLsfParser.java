@@ -26,7 +26,7 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent;
 
-public class ParserTest {
+public class TestLsfParser {
 	
 	private static List<Event> eventList;
 	

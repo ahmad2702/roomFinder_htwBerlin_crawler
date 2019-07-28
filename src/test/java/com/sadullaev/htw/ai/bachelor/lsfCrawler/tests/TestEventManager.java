@@ -27,7 +27,7 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent;
 
-public class DatabaseTest {
+public class TestEventManager {
 
 	private static SessionFactory sessionFactory;
 	private static EventManager eventManager = new EventManager();

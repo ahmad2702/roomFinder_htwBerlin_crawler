@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtil;
 
-public class DateUtilsTest {
+public class TestDateUtils {
 	
 	private static final String START_DATE = "01.07.2019";
 	private static final String END_DATE = "07.07.2019";

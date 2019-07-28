@@ -17,7 +17,7 @@ import org.junit.Test;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DuplicateUtil;
 
-public class DuplicateUtilTest {
+public class TestDuplicateUtils {
 	
 	private static List<Event> list1 = new ArrayList<Event>();
 	private static List<Event> list2 = new ArrayList<Event>();
