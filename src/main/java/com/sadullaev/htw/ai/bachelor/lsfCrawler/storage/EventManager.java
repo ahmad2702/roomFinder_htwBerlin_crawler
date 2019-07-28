@@ -14,6 +14,7 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtil;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DuplicateUtil;
 
+@SuppressWarnings("unchecked")
 public class EventManager implements EventManagerInterface{
 	
 	/**

@@ -20,13 +20,13 @@ import org.hibernate.service.ServiceRegistry;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.storage.EventManager;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent;
 
+@SuppressWarnings("unchecked")
 public class TestEventManager {
 
 	private static SessionFactory sessionFactory;
