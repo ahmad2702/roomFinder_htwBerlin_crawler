@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.UrlUtil;
 
-public class UrlTest {
+public class TestUrlUtils {
 	
 	@Test
 	public void testUrl() {
