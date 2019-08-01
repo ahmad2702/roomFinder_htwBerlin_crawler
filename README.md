@@ -2,7 +2,9 @@
 ##############################
 
 #Table: events
-CREATE SCHEMA `_s0556420__bachelor` ;
+CREATE SCHEMA `_s0556420__bachelor` DEFAULT CHARACTER SET utf8;
+
+use `_s0556420__bachelor`;
 
 CREATE TABLE `_s0556420__bachelor`.`events` (
   `id` INT NOT NULL AUTO_INCREMENT,
