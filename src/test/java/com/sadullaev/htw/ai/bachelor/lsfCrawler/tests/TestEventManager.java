@@ -2,7 +2,10 @@ package com.sadullaev.htw.ai.bachelor.lsfCrawler.tests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -11,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +32,7 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent;
 
 @SuppressWarnings("unchecked")
 public class TestEventManager {
-
+	
 	private static SessionFactory sessionFactory;
 	private static EventManager eventManager = new EventManager();
 	
@@ -37,8 +41,13 @@ public class TestEventManager {
 	private static DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 	
 	@BeforeClass
-	public static void initTest() throws ParseException {
-		Configuration configuration = new Configuration();
+	public static void initTest() throws ParseException, IOException {
+		File file = new File("src/main/resources/hibernate.properties");
+		InputStream inputStream = new FileInputStream(file);
+		Properties property = new Properties();
+		property.load(inputStream);
+		
+		Configuration configuration = new Configuration().addProperties(property);
         ServiceRegistry serviceRegistry
             = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();
