@@ -45,6 +45,25 @@ public class TestHibernateProperties {
 	}
 	
 	@Test
+	public void testUrlIsJdbc() throws IOException {
+		boolean result = false;
+		
+		InputStream inputStream = new FileInputStream(file);
+		Properties property = new Properties();
+		property.load(inputStream);
+		
+		try {
+			String value = property.getProperty("hibernate.connection.url");
+			result = value.contains("jdbc:mysql://");
+		}catch (Exception e) {
+			result = false;
+		}
+		
+		
+		assertTrue(result);
+	}
+	
+	@Test
 	public void testusernameNotEmpty() throws IOException {
 		boolean result = false;
 		
