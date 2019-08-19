@@ -22,7 +22,6 @@ public class EventManager implements EventManagerInterface{
 	 */
 	protected SessionFactory sessionFactory;
 	
-	
 	/**
 	 * running and configuring hibernate for transaction
 	 */
@@ -41,7 +40,6 @@ public class EventManager implements EventManagerInterface{
 		    System.exit(1);
 		}
     }
-	
 	
 	/**
 	 * Start: Load all events function
@@ -68,7 +66,6 @@ public class EventManager implements EventManagerInterface{
 		
 	}
 	
-	
 	/**
 	 * Loading events for a specific day
 	 * @param day
@@ -82,7 +79,6 @@ public class EventManager implements EventManagerInterface{
         List<Event> events = eventParser.getEvents();
 		return events;
 	}
-	
 	
 	/**
 	 * Saving events to database
@@ -165,7 +161,6 @@ public class EventManager implements EventManagerInterface{
         return eventsFromDatabase;
     }
 	
-	
 	/**
 	 * Update existing events into database
 	 * @param events as list
@@ -187,13 +182,18 @@ public class EventManager implements EventManagerInterface{
         }
     }	
 	
-	
-	
+	/**
+	 * Getter function of session factory
+	 * @return session factory
+	 */
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
-
+	/**
+	 * Setter function of session factory
+	 * @param sessionFactory
+	 */
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}

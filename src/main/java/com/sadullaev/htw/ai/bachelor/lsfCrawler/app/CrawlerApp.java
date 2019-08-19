@@ -11,7 +11,7 @@ public class CrawlerApp
 {
 	
 	/**
-	 * Launching LSF-Crawler
+	 * Launching LSF-Crawler App
 	 */
     public static void main( String[] args ) throws ParseException{
     	

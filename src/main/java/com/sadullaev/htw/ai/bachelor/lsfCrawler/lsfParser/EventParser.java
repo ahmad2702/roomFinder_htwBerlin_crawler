@@ -54,7 +54,6 @@ public class EventParser {
 	 */
 	private int size = 0;
 	
-	
 	/**
 	 * Constructor with parameters for parsing
 	 * @param date to be entered into the URL
@@ -158,20 +157,34 @@ public class EventParser {
 		return eventList;
 	}
 
-	
-	
+	/**
+	 * Getter function for Date
+	 * @return Date
+	 */
 	public String getDate() {
 		return date;
 	}
-
+	
+	/**
+	 * Setter function for Date
+	 * @param date
+	 */
 	public void setDate(String date) {
 		this.date = date;
 	}
-
+	
+	/**
+	 * Getter function for table from DOM
+	 * @return Table as Element
+	 */
 	public Elements getTable() {
 		return table;
 	}
-
+	
+	/**
+	 * Setter function for table from DOM
+	 * @param table
+	 */
 	public void setTable(Elements table) {
 		this.table = table;
 	}
@@ -183,8 +196,10 @@ public class EventParser {
 		return table;
 	}
 	
-	
-
+	/**
+	 * Setter function for size of elements in table
+	 * @param size
+	 */
 	public void setSize(int size) {
 		this.size = size;
 	}
@@ -195,16 +210,21 @@ public class EventParser {
 	public int getSize() {
 		return size;
 	}
-
+	
+	/**
+	 * Getter function for status of event
+	 * @return status as boolean
+	 */
 	public boolean isActual() {
 		return isActual;
 	}
-
+	
+	/**
+	 * Setter function for status of event
+	 * @param isActual
+	 */
 	public void setActual(boolean isActual) {
 		this.isActual = isActual;
 	}
-	
-	
-	
-	
+
 }
