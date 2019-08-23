@@ -6,13 +6,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 import org.junit.Test;
 
 public class TestLsfProperties {
 	
-private static File file = new File("src/main/resources/lsf.properties");
+	private static File file = new File("src/main/resources/lsf.properties");
+	
+	final static DateTimeFormatter dateTimeFormatterLsf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 	
 	@Test
 	public void testFileExistsAndCanRead() {
@@ -35,6 +39,25 @@ private static File file = new File("src/main/resources/lsf.properties");
 		
 		try {
 			result = !property.getProperty("url").isEmpty();
+		}catch (Exception e) {
+			result = false;
+		}
+		
+		
+		assertTrue(result);
+	}
+	
+	@Test
+	public void testUrlIsCorrect() throws IOException {
+		boolean result = false;
+		
+		InputStream inputStream = new FileInputStream(file);
+		Properties property = new Properties();
+		property.load(inputStream);
+		
+		try {
+			String value = property.getProperty("url");
+			result = value.contains("https") || value.contains("http");
 		}catch (Exception e) {
 			result = false;
 		}
@@ -152,6 +175,26 @@ private static File file = new File("src/main/resources/lsf.properties");
 	}
 	
 	@Test
+	public void testStartDateIsCorrect() throws IOException {
+		boolean result = false;
+		
+		InputStream inputStream = new FileInputStream(file);
+		Properties property = new Properties();
+		property.load(inputStream);
+		
+		try {
+			String value = property.getProperty("start_date");
+			LocalDate.parse(value, dateTimeFormatterLsf);
+			result = true;
+		}catch (Exception e) {
+			result = false;
+		}
+		
+		
+		assertTrue(result);
+	}
+	
+	@Test
 	public void testEndDateNotEmpty() throws IOException {
 		boolean result = false;
 		
@@ -170,6 +213,26 @@ private static File file = new File("src/main/resources/lsf.properties");
 	}
 	
 	@Test
+	public void testEndDateIsCorrect() throws IOException {
+		boolean result = false;
+		
+		InputStream inputStream = new FileInputStream(file);
+		Properties property = new Properties();
+		property.load(inputStream);
+		
+		try {
+			String value = property.getProperty("end_date");
+			LocalDate.parse(value, dateTimeFormatterLsf);
+			result = true;
+		}catch (Exception e) {
+			result = false;
+		}
+		
+		
+		assertTrue(result);
+	}
+	
+	@Test
 	public void testOptionNotEmpty() throws IOException {
 		boolean result = false;
 		
@@ -179,6 +242,25 @@ private static File file = new File("src/main/resources/lsf.properties");
 		
 		try {
 			result = !property.getProperty("option").isEmpty();
+		}catch (Exception e) {
+			result = false;
+		}
+		
+		
+		assertTrue(result);
+	}
+	
+	@Test
+	public void testOptionIsCorrect() throws IOException {
+		boolean result = false;
+		
+		InputStream inputStream = new FileInputStream(file);
+		Properties property = new Properties();
+		property.load(inputStream);
+		
+		try {
+			String value = property.getProperty("option");
+			result = value.equals("1") || value.equals("2");
 		}catch (Exception e) {
 			result = false;
 		}
