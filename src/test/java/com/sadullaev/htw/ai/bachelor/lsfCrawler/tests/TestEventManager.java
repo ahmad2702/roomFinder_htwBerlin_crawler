@@ -41,20 +41,24 @@ public class TestEventManager {
 	private static DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 	
 	@BeforeClass
-	public static void initTest() throws ParseException, IOException {
+	public static void initTest() throws IOException {
 		File file = new File("src/main/resources/hibernate.properties");
 		InputStream inputStream = new FileInputStream(file);
 		Properties property = new Properties();
 		property.load(inputStream);
-		
-		Configuration configuration = new Configuration().addProperties(property);
-        ServiceRegistry serviceRegistry
-            = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
-        configuration.addAnnotatedClass(TestEvent.class);
-		
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        eventManager.setSessionFactory(sessionFactory);
+		try {
+			Configuration configuration = new Configuration().addProperties(property);
+	        ServiceRegistry serviceRegistry
+	            = new StandardServiceRegistryBuilder()
+	                .applySettings(configuration.getProperties()).build();
+	        configuration.addAnnotatedClass(TestEvent.class);
+			
+	        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+	        eventManager.setSessionFactory(sessionFactory);
+		}catch (Exception e) {
+			System.out.println("SessionFactory kann nicht initialisiert werden, "
+					+ "da die Datei hibernate.properties nicht vervollstaendigt ist.");
+		}
 	}
 	
 	@Before
@@ -133,71 +137,88 @@ public class TestEventManager {
 	
 	@After
 	public void setUpAfter() {
-		clearTestDB();
-	}
-	
-	private void clearTestDB() {
-		Session session = sessionFactory.openSession();    
-		String deleteAllSqlQuery = "delete FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent";
-		session.beginTransaction();
-		session.createQuery(deleteAllSqlQuery).executeUpdate();
-		session.close();
+		try {
+			Session session = sessionFactory.openSession();    
+			String deleteAllSqlQuery = "delete FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent";
+			session.beginTransaction();
+			session.createQuery(deleteAllSqlQuery).executeUpdate();
+			session.close();
+		}catch (Exception e) {
+			// Session can't be closed.
+		}
 	}
 	
 	@Test
  	public void addFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
-		// Save test events 
-		eventManager.add(eventList);
+		List<Event> eventsFromDatabase = null;
 		
-		Session session = sessionFactory.openSession();    
+		try {
+			// Save test events 
+			eventManager.add(eventList);
+			
+			Session session = sessionFactory.openSession();    
+			
+			//read test events from db
+			String readSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent where date='" + "2019-07-01" + "'";
+			eventsFromDatabase = session.createQuery(readSqlQuery).list();
+			System.out.println(eventsFromDatabase.size());
+			session.close();
+		}catch (Exception e) {
+			System.out.println("Bitte pruefen, ob die Datei hibernate.properties vervollstaendigt ist!");
+		}
 		
-		//read test events from db
-		String readSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent where date='" + "2019-07-01" + "'";
-		List<Event> eventsFromDatabase = session.createQuery(readSqlQuery).list();
-		
-		session.close();
-		
-		assertTrue(eventList.equals(eventsFromDatabase));
+		assertTrue(eventsFromDatabase!=null && eventList.equals(eventsFromDatabase));
 	}
 	
 	@Test
  	public void readFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
-		// Add manual test events
-		Session session = sessionFactory.openSession();  
-		for (TestEvent event: eventList) {
-			session.beginTransaction();
-			session.save(event);
-			session.getTransaction().commit();
+		List<Event> eventsFromDatabase = null;
+		
+		try {
+			// Add manual test events
+			Session session = sessionFactory.openSession();  
+			for (TestEvent event: eventList) {
+				session.beginTransaction();
+				session.save(event);
+				session.getTransaction().commit();
+			}
+			session.close();
+			
+			eventsFromDatabase = eventManager.read("01.07.2019", true, "com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent");
+		}catch (Exception e) {
+			System.out.println("Bitte pruefen, ob die Datei hibernate.properties vervollstaendigt ist!");
 		}
-		session.close();
 		
-		List<Event> eventsFromDatabase = eventManager.read("01.07.2019", true, "com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent");
-		
-		assertTrue(eventList.equals(eventsFromDatabase));
+		assertTrue(eventsFromDatabase!=null && eventList.equals(eventsFromDatabase));
 	}
 	
 	@Test
  	public void updateFuncTest() throws UnsupportedEncodingException, IOException, ParseException {
-		Session session = sessionFactory.openSession();  
-		for (TestEvent event: eventList) {
-			session.beginTransaction();
-			session.save(event);
-			session.getTransaction().commit();
+		List<Event> eventsFromDatabase = null;
+		
+		try {
+			Session session = sessionFactory.openSession();  
+			for (TestEvent event: eventList) {
+				session.beginTransaction();
+				session.save(event);
+				session.getTransaction().commit();
+			}
+			session.close();
+			
+			eventList.get(0).setIsActual(0);
+			eventManager.update(eventList);
+	
+			
+			session = sessionFactory.openSession();  
+			String readSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent where date='" + "2019-07-01" + "'";
+			eventsFromDatabase = session.createQuery(readSqlQuery).list();
+			
+			session.close();
+		}catch (Exception e) {
+			System.out.println("Bitte pruefen, ob die Datei hibernate.properties vervollstaendigt ist!");
 		}
-		session.close();
 		
-		eventList.get(0).setIsActual(0);
-		eventManager.update(eventList);
-
-		
-		session = sessionFactory.openSession();  
-		String readSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel.TestEvent where date='" + "2019-07-01" + "'";
-		List<Event> eventsFromDatabase = session.createQuery(readSqlQuery).list();
-		
-		session.close();
-		
-		assertTrue(eventList.equals(eventsFromDatabase));
+		assertTrue(eventsFromDatabase!=null && eventList.equals(eventsFromDatabase));
 	}
-	
-	
+
 }

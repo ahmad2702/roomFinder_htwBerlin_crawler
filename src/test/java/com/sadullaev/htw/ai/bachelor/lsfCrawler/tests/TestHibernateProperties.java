@@ -25,7 +25,6 @@ public class TestHibernateProperties {
 		assertTrue(result);
 	}
 	
-	
 	@Test
 	public void testUrlNotEmpty() throws IOException {
 		boolean result = false;
