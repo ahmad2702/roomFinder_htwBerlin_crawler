@@ -1,4 +1,4 @@
-package com.sadullaev.htw.ai.bachelor.lsfCrawler.model;
+package com.sadullaev.htw.ai.bachelor.lsfCrawler.testModel;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "events")
-public class Event {
+@Table(name = "events_test")
+public class TestEvent {
 	
 	/*
 	 * Instance variables 
@@ -56,7 +56,7 @@ public class Event {
 	/**
 	 * Constructor
 	 */
-	public Event() {
+	public TestEvent() {
 		
 	}
 	
@@ -242,17 +242,17 @@ public class Event {
 	@Override
     public boolean equals(Object obj) {
         if(obj==null) return false;
-        if (!(obj instanceof Event))
+        if (!(obj instanceof TestEvent))
             return false;
         if (obj == this)
             return true;
-        return this.getName().equals(((Event)obj).getName()) &&
-        		this.getBegin().getTime()==((Event)obj).getBegin().getTime() &&
-        		this.getEnd().getTime()==((Event)obj).getEnd().getTime() &&
-        		this.getBuilding().equals(((Event)obj).getBuilding()) &&
-        		this.getRoom().equals(((Event)obj).getRoom()) &&
-        		this.getLecturer().equals(((Event)obj).getLecturer()) &&
-        		this.getIsActual()==((Event)obj).getIsActual();
+        return this.getName().equals(((TestEvent)obj).getName()) &&
+        		this.getBegin().getTime()==((TestEvent)obj).getBegin().getTime() &&
+        		this.getEnd().getTime()==((TestEvent)obj).getEnd().getTime() &&
+        		this.getBuilding().equals(((TestEvent)obj).getBuilding()) &&
+        		this.getRoom().equals(((TestEvent)obj).getRoom()) &&
+        		this.getLecturer().equals(((TestEvent)obj).getLecturer()) &&
+        		this.getIsActual()==((TestEvent)obj).getIsActual();
     }
 
 	/**
@@ -264,5 +264,5 @@ public class Event {
 				+ ", name=" + name + ", lsfId=" + lsfId + ", building=" + building + ", room=" + room + ", lecturer="
 				+ lecturer + ", isActual=" + isActual + "]";
 	}
-
+	
 }

@@ -5,15 +5,16 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.lsfParser.EventParser;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DateUtil;
 import com.sadullaev.htw.ai.bachelor.lsfCrawler.utils.DuplicateUtil;
 
+@SuppressWarnings("unchecked")
 public class EventManager implements EventManagerInterface{
 	
 	/**
@@ -21,23 +22,24 @@ public class EventManager implements EventManagerInterface{
 	 */
 	protected SessionFactory sessionFactory;
 	
-	
 	/**
 	 * running and configuring hibernate for transaction
 	 */
 	public void setup() {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-		        .configure() // configures settings from hibernate.cfg.xml
-		        .build();
+		Configuration configuration = new Configuration();
+        ServiceRegistry serviceRegistry
+            = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
+        configuration.addAnnotatedClass(Event.class);
+        
 		try {
-		    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+		    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		} catch (Exception ex) {
-		    StandardServiceRegistryBuilder.destroy(registry);
+		    StandardServiceRegistryBuilder.destroy(serviceRegistry);
 		    System.out.println("Datenbank wurde nicht gefunden.");
 		    System.exit(1);
 		}
     }
-	
 	
 	/**
 	 * Start: Load all events function
@@ -64,7 +66,6 @@ public class EventManager implements EventManagerInterface{
 		
 	}
 	
-	
 	/**
 	 * Loading events for a specific day
 	 * @param day
@@ -79,18 +80,17 @@ public class EventManager implements EventManagerInterface{
 		return events;
 	}
 	
-	
 	/**
 	 * Saving events to database
 	 * @param events as list
 	 */
-	private void add(List<Event> events) {
+	public void add(List<?> events) {
         if(events.size() != 0) {
         	
         	Session session = sessionFactory.openSession();
 	        System.out.println("Saving events to database...");
 	        
-	        for(Event event : events) {
+	        for(Object event : events) {
 	        	session.beginTransaction();
 	        	session.save(event);
 	        	session.getTransaction().commit();
@@ -108,9 +108,11 @@ public class EventManager implements EventManagerInterface{
 	 * @param isActual: actual or canceled events
 	 */
 	public void updateLastEvents(List<String> date, boolean isActual) throws ParseException {
+		String entityClass =  "com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event";
+		
 		
 		for(int i = 0; i < date.size(); i++) {
-			List<Event> oldList = read(date.get(i), isActual);
+			List<Event> oldList = read(date.get(i), isActual, entityClass);
 	        List<Event> newList = parseAndGetEvents(date.get(i), isActual);
 	        
 	        List<Event> duplikate = DuplicateUtil.getDuplikate(newList, oldList);
@@ -140,16 +142,16 @@ public class EventManager implements EventManagerInterface{
 	 * @param isActual: actual or canceled events
 	 * @return events from database
 	 */
-	private List<Event> read(String day, boolean isActual) {
+	public List<Event> read(String day, boolean isActual, String entityClass) {
 		String dayFormatted = DateUtil.getDateFormatForSql(day);
 
 		Session session = sessionFactory.openSession();    
 		
 		String oldSqlQuery = "";
 		if(isActual) {
-			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='" + dayFormatted + "' and is_actual=1";
+			oldSqlQuery = "FROM "+entityClass+" where date='" + dayFormatted + "' and is_actual=1";
 		} else {
-			oldSqlQuery = "FROM com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event where date='" + dayFormatted + "' and is_actual=0";
+			oldSqlQuery = "FROM "+entityClass+" where date='" + dayFormatted + "' and is_actual=0";
 		}
         
         List<Event> eventsFromDatabase = session.createQuery(oldSqlQuery).list();
@@ -159,20 +161,18 @@ public class EventManager implements EventManagerInterface{
         return eventsFromDatabase;
     }
 	
-	
 	/**
 	 * Update existing events into database
 	 * @param events as list
 	 */
-	private void update(List<Event> events) {      
+	public void update(List<?> events) {      
         if(events.size() != 0) {
         	
         	Session session = sessionFactory.openSession();
 	        System.out.println("Updating...");
 	        
-	        for(Event event : events) {
+	        for(Object event : events) {
 	        	session.beginTransaction();
-	        	System.out.println("-> Id: " + event.getId());
 	        	session.update(event);
 	        	session.getTransaction().commit();
 	        }
@@ -181,8 +181,24 @@ public class EventManager implements EventManagerInterface{
 	        System.out.println("Finished.");
         }
     }	
-
 	
+	/**
+	 * Getter function of session factory
+	 * @return session factory
+	 */
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	/**
+	 * Setter function of session factory
+	 * @param sessionFactory
+	 */
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+
 	/**
 	 * stopping hibernate
 	 */

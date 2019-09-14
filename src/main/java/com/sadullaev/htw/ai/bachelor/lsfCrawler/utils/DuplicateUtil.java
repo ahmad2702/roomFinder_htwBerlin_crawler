@@ -8,6 +8,12 @@ import com.sadullaev.htw.ai.bachelor.lsfCrawler.model.Event;
  
 public class DuplicateUtil {
 	
+	/**
+	 * Getter function for duplicate
+	 * @param newEv
+	 * @param oldEv
+	 * @return duplicate
+	 */
 	public static List<Event> getDuplikate(List<Event> newEv, List<Event> oldEv) {
 		
 		HashSet<Event> intersect = new HashSet<Event>(newEv);
@@ -17,7 +23,4 @@ public class DuplicateUtil {
 		return duplikate;
 	}
 
-	
-	
-	
 }
